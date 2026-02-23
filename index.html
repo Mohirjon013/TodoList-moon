@@ -7,21 +7,22 @@
     <link rel="stylesheet" href="./css/main.css">
 </head>
 <body>
-    <div class="clock max-w-[350px] h-[180px] mx-auto relative mt-[15px] before:w-[80px] before:h-[80px] before:bg-[#BFC6D7] before:rounded-[5px] before:absolute before:left-[10px] before:top-3 before:z-10 after:w-[90px] after:h-[90px] after:bg-[#184562] after:rounded-full after:absolute after:right-[10px] after:bottom-1 after:z-10 ">
-        <div class="max-w-[280px] h-[100px] m-auto absolute inset-0 ">
+    <div class="clock sm:max-w-[500px] max-w-[350px] sm:max-h-[180px] h-[180px] mx-auto relative sm:mt-[20px] mt-[5px] sm:before:w-[80px] before:w-[70px] sm:before:h-[80px] before:h-[70px] before:bg-[#BFC6D7] before:rounded-[5px] before:absolute sm:before:left-[15px] before:left-[10px] sm:before:top-0 before:top-4 before:z-10 sm:after:w-[90px] sm:after:h-[90px] after:w-[85px] after:h-[85px] after:bg-[#184562] after:rounded-full after:absolute sm:after:right-[15px] after:right-[10px] sm:after:bottom-[-2px] after:bottom-2 after:z-10 ">
+
+        <div class="sm:max-w-[400px] max-w-[280px] sm:max-h-[130px] max-h-[100px] m-auto absolute inset-0 ">
             <div class="w-full h-full flex items-center justify-center pb-3 bg-[#C0CDE4]/45 rounded-xl backdrop-blur-[40px] shadow-[0_0_20px_rgba(0,0,0,0.5)] border-3 border-white/18 relative z-20">
-                <span id="hrs" class="w-[43px] text-[48px] text-shadow inline-block text-center relative after:content-['HOURS'] after:text-[15px] after:text-shadow-none after:text-#2D455B after:absolute after:-bottom-[9px] after:left-[60%] after:-translate-x-1/2">00</span>
-                <span class="w-[43px] text-[45px] mb-2 inline-block text-center relative">:</span>    
-                <span id="min" class="w-[43px] text-[48px] text-shadow inline-block text-center relative after:content-['MIN'] after:text-[15px] after:text-shadow-none after:text-#2D455B after:absolute after:-bottom-[9px] after:left-[60%] after:-translate-x-1/2">00</span>    
-                <span class="w-[43px] text-[45px] mb-2 inline-block text-center relative">:</span>   
-                <span id="sec" class="w-[43px] text-[48px] text-shadow inline-block text-center relative after:content-['SEC'] after:text-[15px] after:text-shadow-none after:text-#2D455B after:absolute after:-bottom-[9px] after:left-[60%] after:-translate-x-1/2">00</span>
+                <span id="hrs" class="sm:w-[40px] w-[35px] sm:text-[58px] text-[38px] text-shadow inline-block text-center relative after:content-['HOURS'] sm:after:text-[15px] after:text-[11px] after:text-shadow-none after:text-#2D455B after:absolute after:-bottom-[9px] sm:after:left-[77%] after:left-[55%] after:-translate-x-1/2">00</span>
+                <span class="sm:w-[40px] w-[35px] sm:pl-2 pl-1.5 sm:text-[58px] text-[38px] mb-2 sm:ml-3 ml-0 inline-block text-slate-700 text-center relative">:</span>    
+                <span id="min" class="sm:w-[40px] w-[35px] sm:text-[58px] text-[38px] text-shadow inline-block text-center relative after:content-['MIN'] sm:after:text-[15px] after:text-[11px] after:text-shadow-none after:text-#2D455B after:absolute after:-bottom-[9px] sm:after:left-[77%] after:left-[55%] after:-translate-x-1/2">00</span>    
+                <span class="sm:w-[40px] w-[35px] sm:pl-2 pl-1.5 sm:text-[58px] text-[38px] mb-2 sm:ml-3 ml-0 inline-block text-slate-700 text-center relative">:</span>   
+                <span id="sec" class="sm:w-[40px] w-[35px] sm:text-[58px] text-[38px] text-shadow inline-block text-center relative after:content-['SEC'] sm:after:text-[15px] after:text-[11px] after:text-shadow-none after:text-#2D455B after:absolute after:-bottom-[9px] sm:after:left-[77%] after:left-[55%] after:-translate-x-1/2">00</span>
             </div>
         </div>
     </div>
 
 
 
-    <div class="todo-app max-w-[700px] mx-auto px-5 sm:mt-[30px] mt-[65px] backdrop-blur-lg py-5 rounded-[20px] shadow-[0_0_100px_rgba(0,0,0,0.5)] border-3 border-white/18">
+    <div class="todo-app max-w-[700px] mx-auto px-5 sm:mt-[25px] mt-[30px] backdrop-blur-lg py-5 rounded-[20px] shadow-[0_0_100px_rgba(0,0,0,0.5)] border-3 border-white/18">
         <h1 class="text-center font-bold text-[35px] text-indigo-200 mb-5">Todo App</h1>
         <form class="todo-form max-w-[600px] mx-auto flex items-center gap-2 justify-between">
             <input class="w-[90%] p-3 pl-3 bg-gray-200 rounded-lg outline-none focus:shadow-md focus:shadow-cyan-600 duration-400" type="text" name="inputValue" placeholder="Add new task..." required aria-label="add new task" autocomplete="off">
