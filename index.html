@@ -8,7 +8,6 @@
 </head>
 <body>
     <div class="clock sm:max-w-[500px] max-w-[350px] sm:max-h-[180px] h-[180px] mx-auto relative sm:mt-[20px] mt-[5px] sm:before:w-[80px] before:w-[70px] sm:before:h-[80px] before:h-[70px] before:bg-[#BFC6D7] before:rounded-[5px] before:absolute sm:before:left-[15px] before:left-[10px] sm:before:top-0 before:top-4 before:z-10 sm:after:w-[90px] sm:after:h-[90px] after:w-[85px] after:h-[85px] after:bg-[#184562] after:rounded-full after:absolute sm:after:right-[15px] after:right-[10px] sm:after:bottom-[-2px] after:bottom-2 after:z-10 ">
-
         <div class="sm:max-w-[400px] max-w-[280px] sm:max-h-[130px] max-h-[100px] m-auto absolute inset-0 ">
             <div class="w-full h-full flex items-center justify-center pb-3 bg-[#C0CDE4]/45 rounded-xl backdrop-blur-[40px] shadow-[0_0_20px_rgba(0,0,0,0.5)] border-3 border-white/18 relative z-20">
                 <span id="hrs" class="sm:w-[40px] w-[35px] sm:text-[58px] text-[38px] text-shadow inline-block text-center relative after:content-['HOURS'] sm:after:text-[15px] after:text-[11px] after:text-shadow-none after:text-#2D455B after:absolute after:-bottom-[9px] sm:after:left-[77%] after:left-[55%] after:-translate-x-1/2">00</span>
@@ -19,34 +18,65 @@
             </div>
         </div>
     </div>
-
-
-
-    <div class="todo-app max-w-[700px] mx-auto px-5 sm:mt-[25px] mt-[30px] backdrop-blur-lg py-5 rounded-[20px] shadow-[0_0_100px_rgba(0,0,0,0.5)] border-3 border-white/18">
-        <h1 class="text-center font-bold text-[35px] text-indigo-200 mb-5">Todo App</h1>
+    
+    
+    
+    <div class="todo-app max-w-[700px] mx-auto sm:mt-[25px] mt-[35px] backdrop-blur-lg py-5 rounded-[20px] shadow-[0_0_100px_rgba(0,0,0,0.5)] border-3 border-white/18">
+        <div class="mx-10 mb-9 flex items-center gap-3 justify-between">
+            <div class="w-[300px] font-family">
+                <span class="text-slate-300 text-[19px] text-bold">Task Management</span>
+                <h1 class="text-center font-bold text-[50px] text-slate-600 leading-[58px] mb-5">Mo<em>men</em>tum</h1>
+                <p class="text-slate-200 pl-3 font-Mono leading-[15px] text-[22px] font-bold">Date: Wed 4 Mart</p>
+            </div>
+            
+            <div class="state-container w-[400px] mx-auto px-[15px] py-[15px] rounded-xl border-2 border-slate-500 shadow-[0_2px_5px_rgba(0,0,0,0.5)] flex items-center justify-between gap-[20px]">
+                <div class="details w-full flex flex-col gap-3">
+                    <h3 class="text-white text-bold text-[23px] font-family">You got this!</h3>
+                    <div class="progressbar w-full h-[7px] bg-[#4a9bb8] rounded-[20px] relative">
+                        <div class="progress w-[0%] h-full bg-slate-500 rounded-[20px] duration-400"></div>
+                    </div>
+                </div>
+                <div class="state-number">
+                    <p class="numbers w-[80px] h-[80px] flex items-center justify-center bg-slate-500 border-2 border-slate-600 font-bold rounded-[50%] text-slate-300 text-[22px]">0 / 0</p>
+                </div>
+            </div>
+        </div>
+        
+        
         <form class="todo-form max-w-[600px] mx-auto flex items-center gap-2 justify-between">
-            <input class="w-[90%] p-3 pl-3 bg-gray-200 rounded-lg outline-none focus:shadow-md focus:shadow-cyan-600 duration-400" type="text" name="inputValue" placeholder="Add new task..." required aria-label="add new task" autocomplete="off">
-            <button class="w-[130px] py-[8.5px] bg-[#12688D] rounded-lg  duration-400 cursor-pointer" type="submit">
-                <span class="font-semibold text-[20px] text-white">New Task</span>
+            <input class="w-[90%] p-3 pl-3 bg-gray-200 font-family rounded-xl outline-none placeholder:text-[20px] focus:shadow-md focus:shadow-cyan-600 duration-400 shadow-[0_3px_8px_rgba(0,0,0,0.5)]" type="text" name="inputValue" placeholder="Add new task..." required aria-label="add new task" autocomplete="off">
+            <input class="w-[90%] p-3 pl-3 bg-gray-200 font-family rounded-xl outline-none focus:shadow-md focus:shadow-cyan-600 duration-400 shadow-[0_3px_8px_rgba(0,0,0,0.5)]" type="date" name="inputValue" required  autocomplete="off">
+            <button class="w-[130px] py-[8.5px] bg-[#12688D] rounded-xl shadow-[0_3px_8px_rgba(0,0,0,0.5)] duration-400 cursor-pointer" type="submit">
+                <span class=" text-white">
+                    <img class="mx-auto" src="./images/save-icon.svg" alt="save-icon" width="33" height="33">
+                </span>
             </button>
         </form>
 
-        <ul class="todo-list max-w-[600px] mx-auto mt-5 backdrop-blur-lg  space-y-3 ">
-            <li class="w-full flex items-center gap-1 justify-between p-2 pl-1 rounded-[25px] bg-gray-200">
-                <div class="w-[85%] flex flex-1">
-                    <p class="text-[20px] ml-3">
-                        <span class="font-semibold text-[20px]">1.</span> Salom
+        <div class="max-w-[600px] mx-auto mt-3 flex items-center gap-6 justify-between font-family">
+            <div class="w-[33%] p-1.5 rounded-xl text-center text-[18px] border-2 shadow-[0_1px_10px_rgba(0,0,0,0.5)]  border-slate-400 bg-white cursor-pointer hover:scale-115 duration-400">All List</div>
+            <div class="w-[33%] p-1.5 rounded-xl text-center text-[18px] border-2 shadow-[0_1px_10px_rgba(0,0,0,0.5)] border-slate-400 bg-white cursor-pointer hover:scale-115 duration-400">On Progress</div>
+            <div class="w-[33%] p-1.5 rounded-xl text-center text-[18px] border-2 shadow-[0_1px_10px_rgba(0,0,0,0.5)] border-slate-400 bg-white cursor-pointer hover:scale-115 duration-400">Todo Done</div>
+        </div>
+
+        <ul class="todo-list max-w-[600px] mx-auto mt-5 backdrop-blur-lg  space-y-3">
+            <li class="w-full flex items-center gap-1 justify-between p-2 pl-1 rounded-xl bg-gray-200 shadow-[0_3px_8px_rgba(0,0,0,0.5)]">
+                <div class="w-[85%] ml-3">
+                    <p class="text-[28px]  font-family">
+                        <span class="font-semibold text-[20px]">2.</span> Salom
                     </p>
+                    <p class="font-light text-[12px] font-Mono ml-5 mt-1">Created 05 Mar 2026 20:33</p>
                 </div>
-                <div class="max-w-[220px] flex items-center gap-2">
+
+                <div class="max-w-[220px] flex items-center gap-1">
                     <button class="done-btn hover:scale-115 duration-400 cursor-pointer ">
-                        <img src="./images/complete-icon.svg" alt="done-icon" width="30" height="30">
+                        <img src="./images/complete-icon.svg" alt="done-icon" width="37" height="37">
                     </button>
                     <button class="delete-btn   hover:scale-115 duration-400 cursor-pointer" type="button">
-                        <img src="./images/delete-icon.svg" alt="de-icon" width="32" height="32">
+                        <img src="./images/delete-icon.svg" alt="de-icon" width="37" height="37">
                     </button>
                     <button class="update-btn   hover:scale-115 duration-400 cursor-pointer" type="button">
-                        <img src="./images/edit-icons.svg" alt="edit-icon" width="30" height="30">
+                        <img src="./images/edit-icons.svg" alt="edit-icon" width="36" height="36">
                     </button>
                 </div>
             </li>

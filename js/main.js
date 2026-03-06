@@ -4,8 +4,6 @@ let hours = document.querySelector("#hrs")
 let min = document.querySelector("#min")
 let sec = document.querySelector("#sec")
 
-
-
 setInterval(() => {
     let currentTime = new Date()
     
@@ -14,7 +12,7 @@ setInterval(() => {
     sec.textContent = (currentTime.getSeconds() < 10 ? "0" : "") + currentTime.getSeconds()
 }, 1000);
 
-console.log(currentTime.getSeconds());
-
 
 // clock end 
+
+console.log(new Date());
