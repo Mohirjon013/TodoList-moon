@@ -21,7 +21,7 @@
     
     
     
-    <div class="todo-app max-w-[700px] mx-auto sm:mt-[25px] mt-[35px] backdrop-blur-lg py-5 rounded-[20px] shadow-[0_0_100px_rgba(0,0,0,0.5)] border-3 border-white/18">
+    <div class="todo-app overflow-y-hidden max-w-[700px] mx-auto sm:mt-[25px] mt-[35px] backdrop-blur-lg py-5 rounded-[20px] shadow-[0_0_100px_rgba(0,0,0,0.5)] border-3 border-white/18">
         <div class="mx-10 mb-9 flex items-center gap-3 justify-between">
             <div class="w-[300px] font-family">
                 <span class="text-slate-300 text-[19px] text-bold">Task Management</span>
@@ -44,43 +44,22 @@
         
         
         <form class="todo-form max-w-[600px] mx-auto flex items-center gap-2 justify-between">
-            <input class="w-[90%] p-3 pl-3 bg-gray-200 font-family rounded-xl outline-none placeholder:text-[20px] focus:shadow-md focus:shadow-cyan-600 duration-400 shadow-[0_3px_8px_rgba(0,0,0,0.5)]" type="text" name="inputValue" placeholder="Add new task..." required aria-label="add new task" autocomplete="off">
-            <input class="w-[90%] p-3 pl-3 bg-gray-200 font-family rounded-xl outline-none focus:shadow-md focus:shadow-cyan-600 duration-400 shadow-[0_3px_8px_rgba(0,0,0,0.5)]" type="date" name="inputValue" required  autocomplete="off">
+            <input class="todo-input w-[90%] p-3 pl-3 bg-gray-200 font-family text-[22px] rounded-xl outline-none focus:shadow-md focus:shadow-cyan-600 duration-400 shadow-[0_3px_8px_rgba(0,0,0,0.5)]" type="text" name="inputValue" placeholder="Add new task..." required aria-label="add new task" autocomplete="off">
+            <input class="todo-due w-[90%] text-[20px]  p-3 pl-3 bg-gray-200 font-family rounded-xl outline-none focus:shadow-md focus:shadow-cyan-600 duration-400 shadow-[0_3px_8px_rgba(0,0,0,0.5)]" type="datetime-local" name="inputValue" autocomplete="off">
             <button class="w-[130px] py-[8.5px] bg-[#12688D] rounded-xl shadow-[0_3px_8px_rgba(0,0,0,0.5)] duration-400 cursor-pointer" type="submit">
                 <span class=" text-white">
                     <img class="mx-auto" src="./images/save-icon.svg" alt="save-icon" width="33" height="33">
                 </span>
             </button>
         </form>
-
-        <div class="max-w-[600px] mx-auto mt-3 flex items-center gap-6 justify-between font-family">
-            <div class="w-[33%] p-1.5 rounded-xl text-center text-[18px] border-2 shadow-[0_1px_10px_rgba(0,0,0,0.5)]  border-slate-400 bg-white cursor-pointer hover:scale-115 duration-400">All List</div>
-            <div class="w-[33%] p-1.5 rounded-xl text-center text-[18px] border-2 shadow-[0_1px_10px_rgba(0,0,0,0.5)] border-slate-400 bg-white cursor-pointer hover:scale-115 duration-400">On Progress</div>
-            <div class="w-[33%] p-1.5 rounded-xl text-center text-[18px] border-2 shadow-[0_1px_10px_rgba(0,0,0,0.5)] border-slate-400 bg-white cursor-pointer hover:scale-115 duration-400">Todo Done</div>
+        
+        <div class="max-w-[600px] mx-auto mt-5 flex items-center gap-6 justify-between font-family">
+            <div onclick="handleAllListBox()" class="all-list w-[33%] p-1.5 rounded-xl text-center text-[18px] border-2 shadow-[0_1px_10px_rgba(0,0,0,0.5)] border-slate-400 bg-white cursor-pointer hover:scale-115 duration-400">All List: <span class="text-[26px] leading-[22px]">2</span></div>
+            <div onclick="handleProgressListBox()"  class="progress-list w-[33%] p-1.5 rounded-xl text-center text-[18px] border-2 shadow-[0_1px_10px_rgba(0,0,0,0.5)] border-slate-400 bg-white cursor-pointer hover:scale-115 duration-400">On Progress: <span class="text-[26px] leading-[22px]"></span></div>
+            <div onclick="handleDoneListBox()"  class="done-list w-[33%] p-1.5 rounded-xl text-center text-[18px] border-2 shadow-[0_1px_10px_rgba(0,0,0,0.5)] border-slate-400 bg-white cursor-pointer hover:scale-115 duration-400">Todo Done: <span class="text-[26px] leading-[22px]">2</span></div>
         </div>
-
-        <ul class="todo-list max-w-[600px] mx-auto mt-5 backdrop-blur-lg  space-y-3">
-            <li class="w-full flex items-center gap-1 justify-between p-2 pl-1 rounded-xl bg-gray-200 shadow-[0_3px_8px_rgba(0,0,0,0.5)]">
-                <div class="w-[85%] ml-3">
-                    <p class="text-[28px]  font-family">
-                        <span class="font-semibold text-[20px]">2.</span> Salom
-                    </p>
-                    <p class="font-light text-[12px] font-Mono ml-5 mt-1">Created 05 Mar 2026 20:33</p>
-                </div>
-
-                <div class="max-w-[220px] flex items-center gap-1">
-                    <button class="done-btn hover:scale-115 duration-400 cursor-pointer ">
-                        <img src="./images/complete-icon.svg" alt="done-icon" width="37" height="37">
-                    </button>
-                    <button class="delete-btn   hover:scale-115 duration-400 cursor-pointer" type="button">
-                        <img src="./images/delete-icon.svg" alt="de-icon" width="37" height="37">
-                    </button>
-                    <button class="update-btn   hover:scale-115 duration-400 cursor-pointer" type="button">
-                        <img src="./images/edit-icons.svg" alt="edit-icon" width="36" height="36">
-                    </button>
-                </div>
-            </li>
-        </ul>
+        
+        <ul class="todo-list max-h-[345px] overflow-y-auto max-w-[600px] mx-auto mt-5 py-3 rounded-xl backdrop-blur-lg space-y-3 "></ul>
     </div>
     
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
