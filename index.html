@@ -20,20 +20,19 @@
     </div>
     
     
-    
     <div class="todo-app overflow-y-hidden max-w-[700px] mx-auto sm:mt-[25px] mt-[35px] backdrop-blur-lg py-5 rounded-[20px] shadow-[0_0_100px_rgba(0,0,0,0.5)] border-3 border-white/18">
         <div class="mx-10 mb-9 flex items-center gap-3 justify-between">
             <div class="w-[300px] font-family">
                 <span class="text-slate-300 text-[19px] text-bold">Task Management</span>
                 <h1 class="text-center font-bold text-[50px] text-slate-600 leading-[58px] mb-5">Mo<em>men</em>tum</h1>
-                <p class="text-slate-200 pl-3 font-Mono leading-[15px] text-[22px] font-bold">Date: Wed 4 Mart</p>
+                <p class="today-date text-slate-200 pl-3 font-Mono leading-[15px] text-[20px] font-bold">Date: <span></span> </p>
             </div>
-            
+
             <div class="state-container w-[400px] mx-auto px-[15px] py-[15px] rounded-xl border-2 border-slate-500 shadow-[0_2px_5px_rgba(0,0,0,0.5)] flex items-center justify-between gap-[20px]">
                 <div class="details w-full flex flex-col gap-3">
                     <h3 class="text-white text-bold text-[23px] font-family">You got this!</h3>
                     <div class="progressbar w-full h-[7px] bg-[#4a9bb8] rounded-[20px] relative">
-                        <div class="progress w-[0%] h-full bg-slate-500 rounded-[20px] duration-400"></div>
+                        <div class="progress w-[0%] h-full bg-red-500 rounded-[20px] duration-400"></div>
                     </div>
                 </div>
                 <div class="state-number">
@@ -42,9 +41,8 @@
             </div>
         </div>
         
-        
         <form class="todo-form max-w-[600px] mx-auto flex items-center gap-2 justify-between">
-            <input class="todo-input w-[90%] p-3 pl-3 bg-gray-200 font-family text-[22px] rounded-xl outline-none focus:shadow-md focus:shadow-cyan-600 duration-400 shadow-[0_3px_8px_rgba(0,0,0,0.5)]" type="text" name="inputValue" placeholder="Add new task..." required aria-label="add new task" autocomplete="off">
+            <input class="todo-input w-[90%] p-3 pl-3 bg-gray-200 font-family text-[20px] rounded-xl outline-none focus:shadow-md focus:shadow-cyan-600 duration-400 shadow-[0_3px_8px_rgba(0,0,0,0.5)]" type="text" name="inputValue" placeholder="Add new task..." required aria-label="add new task" autocomplete="off">
             <input class="todo-due w-[90%] text-[20px]  p-3 pl-3 bg-gray-200 font-family rounded-xl outline-none focus:shadow-md focus:shadow-cyan-600 duration-400 shadow-[0_3px_8px_rgba(0,0,0,0.5)]" type="datetime-local" name="inputValue" autocomplete="off">
             <button class="w-[130px] py-[8.5px] bg-[#12688D] rounded-xl shadow-[0_3px_8px_rgba(0,0,0,0.5)] duration-400 cursor-pointer" type="submit">
                 <span class=" text-white">
@@ -59,9 +57,9 @@
             <div onclick="handleDoneListBox()"  class="done-list w-[33%] p-1.5 rounded-xl text-center text-[18px] border-2 shadow-[0_1px_10px_rgba(0,0,0,0.5)] border-slate-400 bg-white cursor-pointer hover:scale-115 duration-400">Todo Done: <span class="text-[26px] leading-[22px]">2</span></div>
         </div>
         
-        <ul class="todo-list max-h-[345px] overflow-y-auto max-w-[600px] mx-auto mt-5 py-3 rounded-xl backdrop-blur-lg space-y-3 "></ul>
+        <ul class="todo-list max-h-[345px] overflow-y-auto max-w-[600px] mx-auto mt-5 py-3 rounded-xl backdrop-blur-lg space-y-3"></ul>
     </div>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="./js/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>

@@ -9,6 +9,12 @@ let elAllList = document.querySelector(".all-list")
 let elProgressList = document.querySelector(".progress-list")
 let elDoneList = document.querySelector(".done-list")
 
+let progressBar = document.querySelector(".progress")
+let stateNumber = document.querySelector(".numbers")
+
+let todayDate = document.querySelector(".today-date")
+
+
 let currentFilter = 'all'
 
 let todo = JSON.parse(localStorage.getItem("setTodo")) || []
@@ -48,6 +54,7 @@ elTodoForm.addEventListener("submit", (e) => {
     }
     todo.push(data)
     applyCurrentFilter()
+    progressTask()
     localStorage.setItem("setTodo", JSON.stringify(todo))
     
     e.target.reset()
@@ -104,8 +111,6 @@ function renderTodo(arr){
     
 }
 renderTodo(todo)
-
-
 // render todo end
 
 
@@ -114,6 +119,7 @@ function handleDeleteBtn(id){
     const findedDeleteIndex = todo.findIndex(item => item.id == id)
     todo.splice(findedDeleteIndex, 1)
     applyCurrentFilter()
+    progressTask()
     localStorage.setItem("setTodo", JSON.stringify(todo))
 }
 // delete function start 
@@ -124,6 +130,7 @@ function handleCompletedBtn(id){
     const findCompletedObj = todo.find(item => item.id == id)
     findCompletedObj.isCompleted = !findCompletedObj.isCompleted
     applyCurrentFilter()
+    progressTask()
     localStorage.setItem("setTodo", JSON.stringify(todo))
 }
 
@@ -144,8 +151,16 @@ function handleDoneListBox(){
 // complete end 
 
 
-
-
+// progress Bar start
+function progressTask(){
+    const completeTask = todo.filter(item => item.isCompleted).length
+    const totalTask = todo.length
+    const progress = (completeTask / totalTask) * 100
+    
+    progressBar.style.width = `${progress}%`
+    stateNumber.innerHTML = `${completeTask} / ${totalTask}`
+}
+// progress Bar start
 
 
 // clock start 
@@ -161,3 +176,76 @@ setInterval(() => {
     sec.textContent = (currentTime.getSeconds() < 10 ? "0" : "") + currentTime.getSeconds()
 }, 1000);
 // clock end 
+
+
+// Today date start
+function gettingMonth(){
+    let date = new Date();
+    if(date.getMonth()+1 == 1){
+        return "January"
+    }
+    else if(date.getMonth() + 1 == 2){
+        return "February"
+    }
+    else if(date.getMonth() + 1 == 3){
+        return "March"
+    }
+    else if(date.getMonth() + 1 == 4){
+        return "April"
+    }
+    else if(date.getMonth() + 1 == 5){
+        return "May"
+    }
+    else if(date.getMonth() + 1 == 6){
+        return "June"
+    }
+    else if(date.getMonth() + 1 == 7){
+        return "July"
+    }
+    else if(date.getMonth() + 1 == 8){
+        return "August"
+    }
+    else if(date.getMonth() + 1 == 9){
+        return "September"
+    }
+    else if(date.getMonth() + 1 == 10){
+        return "October"
+    }
+    else if(date.getMonth() + 1 == 11){
+        return "November"
+    }
+    else if(date.getMonth() + 1 == 12){
+        return "December"
+    }
+}
+function gettingWeek(){
+    let date = new Date();
+    
+    if(date.getUTCDay() + 1 == 1){
+        return "Mon"
+    }
+    else if(date.getUTCDay() + 1 == 2){
+        return "Tue"
+    }
+    else if(date.getUTCDay() + 1 == 3){
+        return "Wed"
+    }
+    else if(date.getUTCDay() + 1 == 4){
+        return "Thur"
+    }
+    else if(date.getUTCDay() + 1 == 5){
+        return "Fri"
+    }
+    else if(date.getUTCDay() + 1 == 6){
+        return "Sat"
+    }
+    else if(date.getUTCDay() + 1 == 7){
+        return "Sun"
+    }
+}
+
+let dateMonth = gettingMonth()
+let dateWeek = gettingWeek()
+let dateday = new Date().getDate()
+todayDate.firstElementChild.innerHTML = `${dateWeek} ${dateday} ${dateMonth}`
+// Today date end
