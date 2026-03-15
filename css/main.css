@@ -1,32 +1,30 @@
-
-
 @font-face {
-    font-display: swap;
-    font-family: 'Cormorant Garamond';
-    font-style: normal;
-    font-weight: 400;
-    src: url('../fonts/cormorant-garamond-v21-latin-regular.woff2') format('woff2');
+  font-display: swap;
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/cormorant-garamond-v21-latin-regular.woff2') format('woff2');
 }
 @font-face {
-    font-display: swap;
-    font-family: 'Cormorant Garamond';
-    font-style: normal;
-    font-weight: 500;
-    src: url('../fonts/cormorant-garamond-v21-latin-500.woff2') format('woff2');
+  font-display: swap;
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 500;
+  src: url('../fonts/cormorant-garamond-v21-latin-500.woff2') format('woff2');
 }
 @font-face {
-    font-display: swap;
-    font-family: 'Cormorant Garamond';
-    font-style: normal;
-    font-weight: 600;
-    src: url('../fonts/cormorant-garamond-v21-latin-600.woff2') format('woff2');
+  font-display: swap;
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 600;
+  src: url('../fonts/cormorant-garamond-v21-latin-600.woff2') format('woff2');
 }
 @font-face {
-    font-display: swap;
-    font-family: 'Cormorant Garamond';
-    font-style: normal;
-    font-weight: 700;
-    src: url('../fonts/cormorant-garamond-v21-latin-700.woff2') format('woff2');
+  font-display: swap;
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 700;
+  src: url('../fonts/cormorant-garamond-v21-latin-700.woff2') format('woff2');
 }
 
 /* dm-mono-regular - latin */
@@ -45,31 +43,46 @@
   src: url('../fonts/dm-mono-v16-latin-500.woff2') format('woff2');
 }
 
+:root{
+  --border:     rgba(100,160,200,0.12);
+  --teal:       #4a9bb8;
+  --silver:     #c4d8e8;
+}
+
 body{
-    padding-right: 15px;
-    padding-left: 15px;
-    /* min-height: 100vh; */
-    background-image: url(./../images/moon-bg.jpg);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: top;
-    background-attachment: fixed;
-    
+  padding-right: 15px;
+  padding-left: 15px;
+  padding-bottom: 20px;
+  background-image: url(./../images/moon-bg.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top;
+  background-attachment: fixed;
+  
 }
 .font-family{
-    font-family: 'Cormorant Garamond';
+  font-family: 'Cormorant Garamond';
 }
 .font-Mono{
   font-family: 'DM Mono';
 }
 .text-shadow{
-    color: #677290;
-    text-shadow: 2.5px 2.5px 0px rgb(205, 211, 213);
+  color: #677290;
+  text-shadow: 2.5px 2.5px 0px rgb(205, 211, 213);
 }
 
+/* .clock {
+position: fixed;
+top: 0;
+left: 0;
+right: 0;
+z-index: 100;
+} */
 
 
 
+
+/* ---- ScrollBar ----- */
 body::-webkit-scrollbar {
   display: none !important;  
 }
@@ -77,7 +90,6 @@ body::-webkit-scrollbar {
 
 ::-webkit-scrollbar {
   /* display: none !important;   */
-
   width: 10px;
 }
 ::-webkit-scrollbar-track {
@@ -91,6 +103,6 @@ body::-webkit-scrollbar {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #007595;
+  background: #2c89a3;
   border-radius: 10px;
 }

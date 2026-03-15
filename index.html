@@ -7,44 +7,49 @@
     <link rel="stylesheet" href="./css/main.css">
 </head>
 <body>
-    <div class="clock sm:max-w-[500px] max-w-[350px] sm:max-h-[180px] h-[180px] mx-auto relative sm:mt-[20px] mt-[5px] sm:before:w-[80px] before:w-[70px] sm:before:h-[80px] before:h-[70px] before:bg-[#BFC6D7] before:rounded-[5px] before:absolute sm:before:left-[15px] before:left-[10px] sm:before:top-0 before:top-4 before:z-10 sm:after:w-[90px] sm:after:h-[90px] after:w-[85px] after:h-[85px] after:bg-[#184562] after:rounded-full after:absolute sm:after:right-[15px] after:right-[10px] sm:after:bottom-[-2px] after:bottom-2 after:z-10 ">
+    <div class="clock sm:max-w-[500px] max-w-[350px] h-[180px] mx-auto relative sm:mt-[20px] mt-[5px] sm:before:w-[80px] before:w-[70px] sm:before:h-[80px] before:h-[70px] before:bg-[#BFC6D7] before:rounded-[5px] before:absolute sm:before:left-[15px] before:left-[10px] sm:before:top-0 before:top-4 before:z-10 sm:after:w-[90px] sm:after:h-[90px] after:w-[85px] after:h-[85px] after:bg-[#184562] after:rounded-full after:absolute sm:after:right-[15px] after:right-[10px] sm:after:bottom-[-2px] after:bottom-2 after:z-10 ">
         <div class="sm:max-w-[400px] max-w-[280px] sm:max-h-[130px] max-h-[100px] m-auto absolute inset-0 ">
-            <div class="w-full h-full flex items-center justify-center pb-3 bg-[#C0CDE4]/45 rounded-xl backdrop-blur-[40px] shadow-[0_0_20px_rgba(0,0,0,0.5)] border-3 border-white/18 relative z-20">
-                <span id="hrs" class="sm:w-[40px] w-[35px] sm:text-[58px] text-[38px] text-shadow inline-block text-center relative after:content-['HOURS'] sm:after:text-[15px] after:text-[11px] after:text-shadow-none after:text-#2D455B after:absolute after:-bottom-[9px] sm:after:left-[77%] after:left-[55%] after:-translate-x-1/2">00</span>
-                <span class="sm:w-[40px] w-[35px] sm:pl-2 pl-1.5 sm:text-[58px] text-[38px] mb-2 sm:ml-3 ml-0 inline-block text-slate-700 text-center relative">:</span>    
-                <span id="min" class="sm:w-[40px] w-[35px] sm:text-[58px] text-[38px] text-shadow inline-block text-center relative after:content-['MIN'] sm:after:text-[15px] after:text-[11px] after:text-shadow-none after:text-#2D455B after:absolute after:-bottom-[9px] sm:after:left-[77%] after:left-[55%] after:-translate-x-1/2">00</span>    
-                <span class="sm:w-[40px] w-[35px] sm:pl-2 pl-1.5 sm:text-[58px] text-[38px] mb-2 sm:ml-3 ml-0 inline-block text-slate-700 text-center relative">:</span>   
-                <span id="sec" class="sm:w-[40px] w-[35px] sm:text-[58px] text-[38px] text-shadow inline-block text-center relative after:content-['SEC'] sm:after:text-[15px] after:text-[11px] after:text-shadow-none after:text-#2D455B after:absolute after:-bottom-[9px] sm:after:left-[77%] after:left-[55%] after:-translate-x-1/2">00</span>
+            <div class="w-full h-full pr-6 flex items-center justify-center pb-3 bg-[#C0CDE4]/45 rounded-xl backdrop-blur-[40px] shadow-[0_0_20px_rgba(0,0,0,0.5)] border-white/18 relative z-20">
+                <span id="hrs" class="sm:w-[50px] w-[42px] sm:text-[67px] text-[52px] text-shadow inline-block text-center relative after:content-['HOURS'] sm:after:text-[15px] after:text-[13px] after:text-shadow-none after:text-[#2D455B] after:absolute after:-bottom-[9px] sm:after:left-[77%] after:left-[70%] after:-translate-x-1/2">00</span>
+                <span class="sm:w-[50px] w-[42px] sm:pl-2 pl-1.5 sm:text-[67px] text-[52px] mb-2 sm:ml-3 ml-0 inline-block text-slate-700 text-center relative">:</span>    
+                <span id="min" class="sm:w-[50px] w-[42px] sm:text-[67px] text-[52px] text-shadow inline-block text-center relative after:content-['MIN'] sm:after:text-[15px] after:text-[13px] after:text-shadow-none after:text-[#2D455B] after:absolute after:-bottom-[9px] sm:after:left-[77%] after:left-[70%] after:-translate-x-1/2">00</span>    
+                <span class="sm:w-[50px] w-[42px] sm:pl-2 pl-1.5 sm:text-[67px] text-[52px] mb-2 sm:ml-3 ml-0 inline-block text-slate-700 text-center relative">:</span>   
+                <span id="sec" class="sm:w-[50px] w-[42px] sm:text-[67px] text-[52px] text-shadow inline-block text-center relative after:content-['SEC'] sm:after:text-[15px] after:text-[13px] after:text-shadow-none after:text-[#2D455B] after:absolute after:-bottom-[9px] sm:after:left-[77%] after:left-[70%] after:-translate-x-1/2">00</span>
             </div>
         </div>
     </div>
     
     
-    <div class="todo-app overflow-y-hidden max-w-[700px] mx-auto sm:mt-[25px] mt-[35px] backdrop-blur-lg py-5 rounded-[20px] shadow-[0_0_100px_rgba(0,0,0,0.5)] border-3 border-white/18">
+    
+    
+    
+    <div class="todo-app  max-w-[700px] mx-auto mt-7 backdrop-blur-lg py-5 rounded-[20px] shadow-[0_0_100px_rgba(0,0,0,0.5)] border-3 border-white/18">
         <div class="mx-10 mb-9 flex items-center gap-3 justify-between">
             <div class="w-[300px] font-family">
                 <span class="text-slate-300 text-[19px] text-bold">Task Management</span>
-                <h1 class="text-center font-bold text-[50px] text-slate-600 leading-[58px] mb-5">Mo<em>men</em>tum</h1>
+                <h1 class="text-center font-bold text-[50px] text-slate-700 leading-[58px] mb-5">Mo<em>men</em>tum</h1>
                 <p class="today-date text-slate-200 pl-3 font-Mono leading-[15px] text-[20px] font-bold">Date: <span></span> </p>
             </div>
-
+            
             <div class="state-container w-[400px] mx-auto px-[15px] py-[15px] rounded-xl border-2 border-slate-500 shadow-[0_2px_5px_rgba(0,0,0,0.5)] flex items-center justify-between gap-[20px]">
                 <div class="details w-full flex flex-col gap-3">
                     <h3 class="text-white text-bold text-[23px] font-family">You got this!</h3>
-                    <div class="progressbar w-full h-[7px] bg-[#4a9bb8] rounded-[20px] relative">
-                        <div class="progress w-[0%] h-full bg-red-500 rounded-[20px] duration-400"></div>
+                    <div class="progressbar w-full h-[7px] bg-[#6b97a7] rounded-[20px] relative">
+                        <div class="progress w-[0%] h-full bg-red-500 rounded-[20px] duration-400"
+                        style="background: linear-gradient(90deg, #5490a5, #c4d8e8);
+                box-shadow: 0 0 12px rgba(74,155,184,0.5);"></div>
                     </div>
                 </div>
                 <div class="state-number">
-                    <p class="numbers w-[80px] h-[80px] flex items-center justify-center bg-slate-500 border-2 border-slate-600 font-bold rounded-[50%] text-slate-300 text-[22px]">0 / 0</p>
+                    <p class="numbers w-[80px] h-[80px] flex items-center justify-center rounded-full text-[22px] font-bold   text-slate-700 border-2 border-slate-600 shadow-[0_2px_5px_rgba(0,0,0,0.5)]">0 / 0</p>
                 </div>
             </div>
         </div>
         
         <form class="todo-form max-w-[600px] mx-auto flex items-center gap-2 justify-between">
-            <input class="todo-input  p-3 pl-3 bg-gray-200 font-family text-[20px] rounded-xl outline-none focus:shadow-md focus:shadow-cyan-600 duration-400 shadow-[0_3px_8px_rgba(0,0,0,0.5)]" type="text" name="inputValue" placeholder="Add new task..." required aria-label="add new task" autocomplete="off">
-            <input class="todo-due  text-[20px] p-3 pl-3 bg-gray-200 font-family rounded-xl outline-none focus:shadow-md focus:shadow-cyan-600 duration-400 shadow-[0_3px_8px_rgba(0,0,0,0.5)]" type="datetime-local" name="inputDue" autocomplete="off">
-            <button class="w-[130px] py-[8.5px] bg-[#12688D] rounded-xl shadow-[0_3px_8px_rgba(0,0,0,0.5)] duration-400 cursor-pointer" type="submit">
+            <input class="todo-input  p-2 pl-3 bg-gray-200 font-family text-[21px] rounded-xl outline-none focus:shadow-md focus:shadow-cyan-800 duration-400 shadow-[0_2px_5px_rgba(0,0,0,0.5)]" type="text" name="inputValue" placeholder="Add new task..." required aria-label="add new task" autocomplete="off">
+            <input class="todo-due  text-[21px] p-2 pl-3 bg-gray-200 font-family rounded-xl outline-none focus:shadow-md focus:shadow-cyan-800 duration-400 shadow-[0_2px_5px_rgba(0,0,0,0.5)]" type="datetime-local" name="inputDue" autocomplete="off">
+            <button class="w-[130px] py-[7px] bg-[#12688D] rounded-xl shadow-[0_2px_5px_rgba(0,0,0,0.5)] duration-400 cursor-pointer" type="submit">
                 <span class=" text-white">
                     <img class="mx-auto" src="./images/save-icon.svg" alt="save-icon" width="33" height="33">
                 </span>
@@ -59,7 +64,18 @@
         
         <ul class="todo-list max-h-[345px] overflow-y-auto max-w-[600px] mx-auto mt-5 py-3 rounded-xl backdrop-blur-lg space-y-3"></ul>
     </div>
+    
+    
+    <div id="wrapper" class="modal-wrapper fixed inset-0 m-auto backdrop-blur z-50 scale-0 duration-400 ">
+        <div class="modal-inner w-[500px] h-[360px] inset-0 m-auto bg-neutral-300 rounded-xl backdrop-blur-[40px] shadow-[0_0_20px_rgba(0,0,0,0.5)] border-3 border-white/18 absolute">
+            <h2 class="uppercase sm:mb-[20px] mb-[13px] sm:mt-[10px] mt-[10px] font-semibold font-family text-[26px] text-center">Update Note</h2>
+            
+            <div class="modal-content"></div>
+        </div>
+    </div>
 
+    <p class="font-bold font-family text-[50px] text-slate-500 text-center mt-9">Mo<em>men</em>tum — keep building</p>
+    
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="./js/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>

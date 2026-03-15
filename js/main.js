@@ -1,5 +1,4 @@
-
-
+// Selecting elements
 let elTodoForm = document.querySelector(".todo-form")
 let elTodoInput = document.querySelector(".todo-input")
 let elTodoDue = document.querySelector(".todo-due")
@@ -11,6 +10,14 @@ let elDoneList = document.querySelector(".done-list")
 
 let progressBar = document.querySelector(".progress")
 let stateNumber = document.querySelector(".numbers")
+
+let elModalWrapper = document.querySelector(".modal-wrapper")
+let elModalInner = document.querySelector(".modal-inner")
+let elModalContent = document.querySelector(".modal-content")
+let elUpdateForm = document.querySelector(".update-form")
+let elUpdateDue = document.querySelector(".update-due")
+
+
 
 let todayDate = document.querySelector(".today-date")
 
@@ -30,7 +37,6 @@ function monthNameToNumber(monthName) {
     }
     return monthMap[monthName]
 }
-
 // Convert to noraml-format
 function formatTimeTaken(milliseconds) {
     const minutes = Math.floor(milliseconds / 60000)
@@ -116,23 +122,20 @@ let dateMonth = gettingMonth()
 let dateWeek = gettingWeek()
 let dateday = date.getDate()
 todayDate.firstElementChild.innerHTML = `${dateWeek} ${dateday} ${dateMonth}`
-
 // Today date end
+
 
 // apply filter start
 function applyCurrentFilter(){
-    let filteredArray;
     if(currentFilter == "done"){
-        filteredArray = todo.filter(item => item.isCompleted)
+        renderTodo(todo.filter(item => item.isCompleted))
     }
     else if(currentFilter == "progress"){
-        filteredArray = todo.filter(item => !item.isCompleted)
+        renderTodo(todo.filter(item => !item.isCompleted))
     }
     else{
-        filteredArray = todo
+        renderTodo(todo)
     }
-    
-    renderTodo(filteredArray)
 }
 // apply filter start
 
@@ -175,7 +178,7 @@ elTodoForm.addEventListener("submit", (e) => {
 // render todo start
 function renderTodo(arr){
     elList.innerHTML = ""
-
+    
     arr.forEach((item, index) => {
         const dueDate = item.due ? new Date(item.due) : null;
         const isOverdue = dueDate && dueDate < new Date();
@@ -195,7 +198,7 @@ function renderTodo(arr){
             <div class="flex items-center gap-1 justify-between ${item.isCompleted ? " opacity-60" : "" }">
                 <div class="w-[85%] flex items-center ml-3">
                     <span class=" font-semibold text-[25px] font-Mono mt-1 pr-1">${index + 1}.</span>
-                    <p class="text-[28px] font-family  ${item.isCompleted ? "line-through opacity-45" : "" } ">${item.value}</p>
+                    <p class="text-[28px] font-family leading-none ${item.isCompleted ? "line-through opacity-45" : "" } ">${item.value}</p>
                 </div>
                     
                 <div class="max-w-[220px] flex gap-1">
@@ -208,32 +211,31 @@ function renderTodo(arr){
                     <button onclick="handleDeleteBtn(${item.id})" class="delete-btn hover:scale-115 duration-400 cursor-pointer" type="button">
                         <img src="./images/delete-icon.svg" alt="de-icon" width="37" height="37">
                     </button>
-                    <button class="update-btn hover:scale-115 duration-400 cursor-pointer" type="button">
+                    <button onclick="handleUpdateBtn(${item.id})" type="button" class="update-btn ${item.isCompleted ? 'opacity-50 cursor-not-allowed' : "hover:scale-115 duration-400 cursor-pointer"}" ${item.isCompleted ? 'disabled' : ""} >
                         <img src="./images/edit-icons.svg" alt="edit-icon" width="36" height="36">
                     </button>
                 </div>
             </div>
         
-            <div class="flex items-center ml-2 mt-3 ${item.isCompleted ? " opacity-60 justify-around" : "gap-4"} ${item.isCompleted && timeTaken ? "justify-start gap-4" : ""}">
-                <p class="text-[11px] font-Mono ">Created: ${String(item.createdTime.dateday).padStart(2,0)} ${item.createdTime.dateMonth} ${item.createdTime.dateYear} ${String(item.createdTime.dateHour).padStart(2,0)}:${String(item.createdTime.dateMin).padStart(2,0)} </p>
-
+            <div class="flex items-center ml-2 mt-1 ${item.isCompleted ? " opacity-60 justify-around" : "gap-4"} ${item.isCompleted && timeTaken ? "justify-start gap-4" : ""}">
+                <p class="text-[11px] font-Mono  mt-2">Created: ${String(item.createdTime.dateday).padStart(2,0)} ${item.createdTime.dateMonth} ${item.createdTime.dateYear} ${String(item.createdTime.dateHour).padStart(2,0)}:${String(item.createdTime.dateMin).padStart(2,0)} </p>
+        
                 ${item.isCompleted && timeTaken ? `
-                    <p class="text-[11px] font-Mono bg-[rgba(34,197,94,0.30)] px-2 p-1 rounded-xl">Completed in: ${formatTimeTaken(timeTaken)} </p>
+                    <p class="text-[10px] font-Mono bg-[rgba(34,197,94,0.30)] px-2 p-1 rounded-xl">Completed in: ${formatTimeTaken(timeTaken)} </p>
                     ${item.due && item.completedTime > new Date(item.due).getTime() ? `
                         <div class="flex items-center gap-1 !text-[#7f1d1d] bg-[rgba(239,68,68,0.30)] px-2 p-1 rounded-xl">
                             <img src="./images/alert-icon.svg" alt="alert-icon" width="15" height="15">
-                            <p class="text-[11px] font-Mono">Completed: ${formatTimeTaken(item.completedTime - new Date(item.due).getTime())} late</p>
+                            <p class="text-[10px] font-Mono">Completed: ${formatTimeTaken(item.completedTime - new Date(item.due).getTime())} late</p>
                         </div>
                     ` : ''}
                 ` : ""}
-
-
+        
                 ${item.due && !item.isCompleted ? `
                     <div class="flex items-center gap-1 text-white ${isOverdue ? "!text-[#7f1d1d] bg-[rgba(239,68,68,0.30)]" : "bg-[rgba(50,125,180,0.30)] !text-[#255867]"} px-2 p-1 rounded-xl">
                         <img src="${isOverdue ? "./images/warning-icon.svg" : "./images/clock-icon.svg"}"  alt="clock-icon" width="15" height="15">
-
-
-                        <p class="text-[12px] font-Mono !tracking-tighter">${isOverdue ? 'Overdue' : 'Due'} ${new Date(item.due).toLocaleString('en-US', {month: 'long', day: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit'}).replace("," , "")}</p>
+        
+        
+                        <p class="text-[10px] font-Mono !tracking-tighter">${isOverdue ? 'Overdue' : 'Due'} ${new Date(item.due).toLocaleString('en-US', {month: 'long', day: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit'}).replace("," , "")}</p>
                     </div>
                 ` : ''}
             </div>
@@ -246,10 +248,63 @@ function renderTodo(arr){
     elAllList.lastChild.textContent = todo.length
     elProgressList.lastChild.textContent = todo.filter(item => !item.isCompleted).length
     elDoneList.lastChild.textContent = todo.filter(item => item.isCompleted).length
-    
 }
 renderTodo(todo)
 // render todo end
+
+
+// Update function start 
+function handleUpdateBtn(id){
+    elModalWrapper.classList.remove("scale-0")
+    document.body.classList.add("overflow-y-hidden")
+    
+    const findedUpdatedItem = todo.find(item => item.id == id)
+    elModalContent.innerHTML = `
+        <form class="update-form w-[500px] mx-auto px-4">
+                    <label class="w-full">
+                        <span class="inline-block text-[23px] font-family mb-1">Task Description</span>
+                        <input class="update-input w-full p-2  bg-white font-family text-[21px] rounded-xl outline-none focus:shadow-md focus:shadow-zinc-600 duration-400 shadow-[0_3px_8px_rgba(0,0,0,0.5)]" type="text" value="${findedUpdatedItem.value}" name="inputValue" placeholder="Add new task..." required aria-label="add new task" autocomplete="off">
+                    </label>
+                
+                    <label class="w-full inline-block mt-5">
+                        <span class="inline-block text-[23px] font-family mb-1">Due Date</span>
+                        <input class="update-due w-full text-[21px] p-2 pl-3 bg-white font-family rounded-xl outline-none focus:shadow-md focus:shadow-zinc-600 duration-400 shadow-[0_3px_8px_rgba(0,0,0,0.5)]" type="datetime-local" value="${findedUpdatedItem.due}" name="inputDue" autocomplete="off">
+                    </label>
+                    
+                    <div class="mt-9 flex items-center justify-between">
+                        <button type="submit" class="w-[65%] text-white py-2 bg-mist-700 rounded-lg shadow-[0_3px_8px_rgba(0,0,0,0.5)] cursor-pointer border-2 border-white/18">Save Changes</button>
+                        <button onclick="handleCancelBtn()" type="button" class="w-[30%] text-mist-700 py-2 bg-white rounded-lg shadow-[0_3px_8px_rgba(0,0,0,0.5)] cursor-pointer border-2 border-mist-500">Cancel</button>
+                    </div>
+        </form>
+    `
+    
+    let elUpdateForm = document.querySelector(".update-form")
+    
+    elUpdateForm.addEventListener('submit', (e) => {
+        e.preventDefault()
+        
+        findedUpdatedItem.value = e.target.inputValue.value
+        findedUpdatedItem.due = e.target.inputDue.value
+        
+        elModalWrapper.classList.add("scale-0")
+        document.body.classList.remove("overflow-y-hidden")
+        
+        applyCurrentFilter()
+        // progressTask()
+        localStorage.setItem("setTodo", JSON.stringify(todo))
+    })
+}
+
+elModalWrapper.addEventListener("click", function(e){
+    if(e.target.id == "wrapper"){
+        elModalWrapper.classList.add("scale-0")
+    }
+})
+function handleCancelBtn(){
+    elModalWrapper.classList.add("scale-0")
+    document.body.classList.remove("overflow-y-hidden")
+}
+// Update function start 
 
 
 // delete function start 
