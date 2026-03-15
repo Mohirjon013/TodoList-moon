@@ -90,29 +90,8 @@ function gettingMonth(){
     }
 }
 function gettingWeek(){
-    let date = new Date();
-    
-    if(date.getUTCDay() + 1 == 1){
-        return "Mon"
-    }
-    else if(date.getUTCDay() + 1 == 2){
-        return "Tue"
-    }
-    else if(date.getUTCDay() + 1 == 3){
-        return "Wed"
-    }
-    else if(date.getUTCDay() + 1 == 4){
-        return "Thur"
-    }
-    else if(date.getUTCDay() + 1 == 5){
-        return "Fri"
-    }
-    else if(date.getUTCDay() + 1 == 6){
-        return "Sat"
-    }
-    else if(date.getUTCDay() + 1 == 7){
-        return "Sun"
-    }
+    const days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]
+    return days[new Date().getDay()]
 }
 let date = new Date()
 let dateYear = date.getFullYear()
@@ -178,6 +157,8 @@ function renderTodo(arr){
     elList.innerHTML = ""
     
     arr.forEach((item, index) => {
+        if (!item.createdTime) return
+
         const dueDate = item.due ? new Date(item.due) : null;
         const isOverdue = dueDate && dueDate < new Date();
         
@@ -298,6 +279,7 @@ function handleUpdateBtn(id){
 elModalWrapper.addEventListener("click", function(e){
     if(e.target.id == "wrapper"){
         elModalWrapper.classList.add("scale-0")
+        document.body.classList.remove("overflow-y-hidden")
     }
 })
 function handleCancelBtn(){
