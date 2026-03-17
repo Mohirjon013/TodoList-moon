@@ -9,11 +9,11 @@
 <body>
     <div class="clock sm:max-w-[500px] max-w-[350px] h-[180px] mx-auto relative sm:mt-[20px] mt-[5px] sm:before:w-[80px] before:w-[70px] sm:before:h-[80px] before:h-[70px] before:bg-[#BFC6D7] before:rounded-[5px] before:absolute sm:before:left-[15px] before:left-[10px] sm:before:top-0 before:top-4 before:z-10 sm:after:w-[90px] sm:after:h-[90px] after:w-[85px] after:h-[85px] after:bg-[#184562] after:rounded-full after:absolute sm:after:right-[15px] after:right-[10px] sm:after:bottom-[-2px] after:bottom-2 after:z-10 ">
         <div class="sm:max-w-[400px] max-w-[280px] sm:max-h-[130px] max-h-[100px] m-auto absolute inset-0 ">
-            <div class="w-full h-full pr-6 flex items-center justify-center pb-3 bg-[#C0CDE4]/45 rounded-xl backdrop-blur-[40px] shadow-[0_0_20px_rgba(0,0,0,0.5)] border-white/18 relative z-20">
+            <div class="w-full h-full pr-2 flex items-center justify-center pb-3 bg-[#C0CDE4]/45 rounded-xl backdrop-blur-[40px] shadow-[0_0_20px_rgba(0,0,0,0.5)] border-white/18 relative z-20">
                 <span id="hrs" class="sm:w-[50px] w-[42px] sm:text-[67px] text-[52px] text-shadow inline-block text-center relative after:content-['HOURS'] sm:after:text-[15px] after:text-[13px] after:text-shadow-none after:text-[#2D455B] after:absolute after:-bottom-[9px] sm:after:left-[77%] after:left-[70%] after:-translate-x-1/2">00</span>
-                <span class="sm:w-[50px] w-[42px] sm:pl-2 pl-3 sm:text-[67px] text-[52px] mb-2 sm:ml-3 ml-0 inline-block text-slate-700 text-center relative">:</span>    
+                <span class="sm:w-[50px] w-[42px] pl-3 sm:pl-2 sm:text-[67px] text-[52px] mb-2 sm:ml-3 ml-0 inline-block text-slate-700 text-center relative">:</span>    
                 <span id="min" class="sm:w-[50px] w-[42px] sm:text-[67px] text-[52px] text-shadow inline-block text-center relative after:content-['MIN'] sm:after:text-[15px] after:text-[13px] after:text-shadow-none after:text-[#2D455B] after:absolute after:-bottom-[9px] sm:after:left-[77%] after:left-[70%] after:-translate-x-1/2">00</span>    
-                <span class="sm:w-[50px] w-[42px] sm:pl-2 pl-3 sm:text-[67px] text-[52px] mb-2 sm:ml-3 ml-0 inline-block text-slate-700 text-center relative">:</span>   
+                <span class="sm:w-[50px] w-[42px] pl-4 sm:pl-2 sm:text-[67px] text-[52px] mb-2 sm:ml-3 ml-0 inline-block text-slate-700 text-center relative">:</span>   
                 <span id="sec" class="sm:w-[50px] w-[42px] sm:text-[67px] text-[52px] text-shadow inline-block text-center relative after:content-['SEC'] sm:after:text-[15px] after:text-[13px] after:text-shadow-none after:text-[#2D455B] after:absolute after:-bottom-[9px] sm:after:left-[77%] after:left-[70%] after:-translate-x-1/2">00</span>
             </div>
         </div>
@@ -22,12 +22,12 @@
     <div class="todo-app  max-w-[700px] mx-auto sm:mt-7 mt-4 backdrop-blur-lg am:py-5 py-3 rounded-[20px] shadow-[0_0_100px_rgba(0,0,0,0.5)] border-3 border-white/18">
         <div class="sm:mx-10 mx-5 sm:mb-9 mb-4 sm:flex sm:items-center sm:gap-3 sm:justify-between">
             <div class="sm:w-[300px] w-full mx-auto font-family sm:mb-0 mb-5">
-                <span class="block text-[#112240] max-[4500px]:text-[28px] max-[370px]:text-[22px] sm:text-[19px] text-bold sm:text-start text-center">Task Management</span>
-                <h1 class=" font-bold max-[370px]:text-[55px] max-[450px]:text-[65px] sm:text-[50px]  sm:text-start text-center text-[#F8FAFC] sm:leading-[58px] max-[450px]:leading-[45px] max-[370px]:leading-[45px] mb-5">Mo<em>men</em>tum</h1>
+                <span class="block text-[#112240] text-[22px] min-[371px]:text-[28px] sm:text-[19px] text-bold sm:text-start text-center">Task Management</span>
+                <h1 class=" font-bold text-[55px] min-[371px]:text-[65px] sm:text-[50px] sm:text-start text-center text-[#F8FAFC] sm:leading-[58px] max-[550px]:leading-[45px] max-[370px]:leading-[45px] mb-5">Mo<em>men</em>tum</h1>
                 <p class="today-date text-teal-900 sm:pl-3 pl-0 sm:text-start text-center font-Mono sm:leading-[15px] leading-[12px] sm:text-[20px] text-[18px] font-bold">Date: <span></span> </p>
             </div>
             
-            <div class="state-container sm:w-[400px] max-w-[400px] mx-auto px-[15px] py-[15px] rounded-xl border-2 border-slate-500 shadow-[0_2px_5px_rgba(0,0,0,0.5)] flex items-center justify-between gap-[20px]">
+            <div class="state-container sm:w-[400px] w-full mx-auto px-[15px] py-[15px] rounded-xl border-2 border-slate-500 shadow-[0_2px_5px_rgba(0,0,0,0.5)] flex items-center justify-between gap-[20px]">
                 <div class="details w-full flex flex-col gap-3">
                     <h3 class="text-[#F8FAFC] text-bold sm:text-[23px] text-[20px] font-family">You got this!</h3>
                     <div class="progressbar w-full h-[7px] bg-[#3c6675] rounded-[20px] relative">
@@ -44,7 +44,7 @@
             <input class="todo-input w-full sm:mb-0 mb-2 sm:p-2 p-1 sm:pl-3 pl-2 bg-gray-200 font-family text-[21px] rounded-xl outline-none focus:shadow-md focus:shadow-cyan-800 duration-400 shadow-[0_2px_5px_rgba(0,0,0,0.5)]" type="text" name="inputValue" placeholder="Add new task..." required aria-label="add new task" autocomplete="off">
             <div class="flex items-center justify-between sm:w-[55%] w-full gap-2">
                 <input class="todo-due flex-1 min-w-0 text-[21px] sm:p-2 p-1 sm:pl-3 pl-2 bg-gray-200 font-family rounded-xl outline-none focus:shadow-md focus:shadow-cyan-800 duration-400 shadow-[0_2px_5px_rgba(0,0,0,0.5)]" type="datetime-local" name="inputDue" autocomplete="off">
-                <button class="sm:w-[100px] w-[75px] sm:py-[7px] py-1 bg-[#12688D] rounded-xl shadow-[0_2px_5px_rgba(0,0,0,0.5)] duration-400 cursor-pointer" type="submit">
+                <button class="flex-shrink-0 sm:w-[100px] w-[75px] sm:py-[7px] py-1 bg-[#12688D] rounded-xl shadow-[0_2px_5px_rgba(0,0,0,0.5)] duration-400 cursor-pointer" type="submit">
                     <span class=" text-white">
                         <img class="mx-auto" src="./images/save-icon.svg" alt="save-icon" width="33" height="33">
                     </span>

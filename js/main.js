@@ -171,7 +171,7 @@ function renderTodo(arr){
         ).getTime()
         const timeTaken = item.completedTime ? item.completedTime - createdTimestamp : null
         let elItem = document.createElement("li")
-        elItem.className = "w-[98%] sm:p-2 p-1 sm:pl-1 pl-0 px-1 pb-1.5 rounded-xl bg-gray-200 shadow-[0_3px_8px_rgba(0,0,0,0.5)]"
+        elItem.className = "w-[98%] sm:p-2 p-1 sm:pl-1 pl-0 sm:px-1 px-1.5 pb-1.5 rounded-xl bg-gray-200 shadow-[0_3px_8px_rgba(0,0,0,0.5)]"
         
         elItem.innerHTML = `
             <div class="flex items-start gap-1 justify-between ${item.isCompleted ? " opacity-60" : "" }">
@@ -182,31 +182,31 @@ function renderTodo(arr){
                     
                 <div class="flex-shrink-0 flex gap-1">
                     <button onclick="handleCompletedBtn(${item.id})" class="done-btn hover:scale-115 duration-400 cursor-pointer ${item.isCompleted ? "hidden" : "block" }">
-                        <img src="./images/done-icon.svg" alt="done-icon" width="37" height="37">
+                        <img class="w-[25px] h-[25px] min-[390px]:w-[29px] min-[390px]:h-[29px] sm:w-[37px] sm:h-[37px]" src="./images/done-icon.svg" alt="done-icon" width="37" height="37">
                     </button>
                     <button onclick="handleCompletedBtn(${item.id})" class="done-btn hover:scale-115 duration-400 cursor-pointer ${item.isCompleted ? "block" : "hidden" } ">
-                        <img src="./images/complete-icon.svg" alt="done-icon" width="37" height="37">
+                        <img class="w-[25px] h-[25px] min-[390px]:w-[29px] min-[390px]:h-[29px] sm:w-[37px] sm:h-[37px]" src="./images/complete-icon.svg" alt="done-icon" width="37" height="37">
                     </button>
                     <button onclick="handleDeleteBtn(${item.id})" class="delete-btn hover:scale-115 duration-400 cursor-pointer" type="button">
-                        <img src="./images/delete-icon.svg" alt="de-icon" width="37" height="37">
+                        <img class="w-[25px] h-[25px] min-[390px]:w-[29px] min-[390px]:h-[29px] sm:w-[37px] sm:h-[37px]" src="./images/delete-icon.svg" alt="de-icon" width="37" height="37">
                     </button>
                     <button onclick="handleUpdateBtn(${item.id})" type="button" class="update-btn ${item.isCompleted ? 'opacity-50 cursor-not-allowed' : "hover:scale-115 duration-400 cursor-pointer"}" ${item.isCompleted ? 'disabled' : ""} >
-                        <img src="./images/edit-icons.svg" alt="edit-icon" width="36" height="36">
+                        <img class="w-[23px] h-[23px] min-[390px]:w-[27px] min-[390px]:h-[27px] sm:w-[35px] sm:h-[35px]" src="./images/edit-icons.svg" alt="edit-icon" width="36" height="36">
                     </button>
                 </div>
             </div>
         
-            <div class="flex sm:flex-nowrap flex-wrap items-center ml-2 sm:mt-3 mt-2 sm:justify-start justify-start gap-2 sm:gap-4 ${item.isCompleted ? "opacity-60" : ""}">
+            <div class="flex sm:flex-nowrap flex-wrap items-center ml-2 sm:mt-3 mt-2 sm:justify-start justify-between gap-0.5 sm:gap-4 ${item.isCompleted ? "opacity-60" : ""}">
         
         
-                <p class="sm:text-[11px] max-[370px]:text-[7px] max-[450px]:text-[10px] font-Mono sm:py-0 py-1">Created: ${String(item.createdTime.dateday).padStart(2,0)} ${item.createdTime.dateMonth} ${item.createdTime.dateYear} ${String(item.createdTime.dateHour).padStart(2,0)}:${String(item.createdTime.dateMin).padStart(2,0)} </p>
+                <p class="text-[7px] min-[381px]:text-[9px] sm:text-[11px] font-Mono sm:py-0 py-1">Created: ${String(item.createdTime.dateday).padStart(2,0)} ${item.createdTime.dateMonth} ${item.createdTime.dateYear} ${String(item.createdTime.dateHour).padStart(2,0)}:${String(item.createdTime.dateMin).padStart(2,0)} </p>
         
                 ${item.isCompleted && timeTaken ? `
-                    <p class="sm:text-[10px] max-[370px]:text-[8px] max-[410px]:text-[9.5px] max-[450px]:text-[10px] font-Mono bg-[rgba(34,197,94,0.30)] sm:px-2 px-1 p-1 rounded-lg">Completed in: ${formatTimeTaken(timeTaken)} </p>
+                    <p class="text-[7px] min-[381px]:text-[9px] sm:text-[11px] font-Mono bg-[rgba(34,197,94,0.30)] sm:px-2 px-1 p-1 rounded-lg">Completed in: ${formatTimeTaken(timeTaken)} </p>
                     ${item.due && item.completedTime > new Date(item.due).getTime() ? `
                         <div class="flex items-center gap-1 !text-[#7f1d1d] bg-[rgba(239,68,68,0.30)] sm:px-2 px-1 p-1 rounded-lg">
-                            <img class="sm:w-[15px] w-[12px] h-[12px] sm:h-[15px]" src="./images/alert-icon.svg" alt="alert-icon" width="15" height="15">
-                            <p class="text-[9px] font-Mono">Completed: ${formatTimeTaken(item.completedTime - new Date(item.due).getTime())} late</p>
+                            <img class="sm:w-[15px] w-[11px] h-[11px] sm:h-[15px]" src="./images/alert-icon.svg" alt="alert-icon" width="15" height="15">
+                            <p class="text-[7px] min-[381px]:text-[9px] sm:text-[11px] font-Mono">Completed: ${formatTimeTaken(item.completedTime - new Date(item.due).getTime())} late</p>
                         </div>
                     ` : ''}
                 ` : ""}
@@ -216,7 +216,7 @@ function renderTodo(arr){
                         <img class="sm:w-[15px] w-[11px] h-[11px] sm:h-[15px]" src="${isOverdue ? "./images/warning-icon.svg" : "./images/clock-icon.svg"}"  alt="clock-icon" width="15" height="15">
         
         
-                        <p class="sm:text-[11px] max-[370px]:text-[8px] max-[410px]:text-[8px] max-[450px]:text-[10px] font-Mono !tracking-tighter whitespace-nowrap">${isOverdue ? 'Overdue:' : 'Due:'} ${new Date(item.due).toLocaleString('en-US', {month: 'short', day: '2-digit', hour: '2-digit', minute: '2-digit'}).replace("," , "")}</p>
+                        <p class="text-[7px] min-[381px]:text-[9px] sm:text-[11px] font-Mono !tracking-tighter whitespace-nowrap">${isOverdue ? 'Overdue:' : 'Due:'} ${new Date(item.due).toLocaleString('en-US', {month: 'short', day: '2-digit', hour: '2-digit', minute: '2-digit'}).replace("," , "")}</p>
                     </div>
                 ` : ''}
             </div>
