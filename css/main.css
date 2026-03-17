@@ -43,6 +43,7 @@
   src: url('../fonts/dm-mono-v16-latin-500.woff2') format('woff2');
 }
 
+
 body{
   padding-right: 15px;
   padding-left: 15px;
@@ -66,14 +67,12 @@ body{
 }
 
 
-
 /* ---- ScrollBar ----- */
 body::-webkit-scrollbar {
   display: none !important;  
 }
 
 ::-webkit-scrollbar {
-  /* display: none !important;   */
   width: 5px;
 }
 ::-webkit-scrollbar-track {
@@ -91,26 +90,13 @@ body::-webkit-scrollbar {
 }
 
 
-
-
-
-
-
-
-
-
-
-
+/* due styel */
 .todo-due {
-    color: #374151;                    /* dark color when has real value */
+  color: #6b7280;                   
 }
-
-/* Show placeholder style when empty */
-.todo-due:placeholder-shown {
-    color: #6b7280;                    /* gray color for placeholder */
+.todo-due:not(:placeholder-shown) {
+  color: #111827;                
 }
-
-/* When user taps, it becomes datetime picker */
-.todo-due:focus {
-    color: #374151;
+.todo-due::placeholder {
+  color: #6b7280;
 }

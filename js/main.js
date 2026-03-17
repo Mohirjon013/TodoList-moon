@@ -1,29 +1,28 @@
 // Selecting elements
-let elTodoForm = document.querySelector(".todo-form")
-let elTodoInput = document.querySelector(".todo-input")
-let elTodoDue = document.querySelector(".todo-due")
-let elList = document.querySelector(".todo-list")
+const elTodoForm = document.querySelector(".todo-form")
+const elTodoInput = document.querySelector(".todo-input")
+const elTodoDue = document.querySelector(".todo-due")
+const elList = document.querySelector(".todo-list")
 
-let elAllList = document.querySelector(".all-list")
-let elProgressList = document.querySelector(".progress-list")
-let elDoneList = document.querySelector(".done-list")
+const elAllList = document.querySelector(".all-list")
+const elProgressList = document.querySelector(".progress-list")
+const elDoneList = document.querySelector(".done-list")
 
-let progressBar = document.querySelector(".progress")
-let stateNumber = document.querySelector(".numbers")
+const progressBar = document.querySelector(".progress")
+const stateNumber = document.querySelector(".numbers")
 
-let elModalWrapper = document.querySelector(".modal-wrapper")
-let elModalInner = document.querySelector(".modal-inner")
-let elModalContent = document.querySelector(".modal-content")
-let elUpdateForm = document.querySelector(".update-form")
-let elUpdateDue = document.querySelector(".update-due")
+const elModalWrapper = document.querySelector(".modal-wrapper")
+const elModalInner = document.querySelector(".modal-inner")
+const elModalContent = document.querySelector(".modal-content")
+const elUpdateForm = document.querySelector(".update-form")
+const elUpdateDue = document.querySelector(".update-due")
 
 
-let todayDate = document.querySelector(".today-date")
+const todayDate = document.querySelector(".today-date")
 
 let currentFilter = 'all'
 
 let todo = JSON.parse(localStorage.getItem("setTodo")) || []
-console.log(todo);
 
 
 
@@ -49,54 +48,11 @@ function formatTimeTaken(milliseconds) {
 }
 
 
-// Today date start
-function gettingMonth(){
-    let date = new Date();
-    if(date.getMonth()+1 == 1){
-        return "January"
-    }
-    else if(date.getMonth() + 1 == 2){
-        return "February"
-    }
-    else if(date.getMonth() + 1 == 3){
-        return "March"
-    }
-    else if(date.getMonth() + 1 == 4){
-        return "April"
-    }
-    else if(date.getMonth() + 1 == 5){
-        return "May"
-    }
-    else if(date.getMonth() + 1 == 6){
-        return "June"
-    }
-    else if(date.getMonth() + 1 == 7){
-        return "July"
-    }
-    else if(date.getMonth() + 1 == 8){
-        return "August"
-    }
-    else if(date.getMonth() + 1 == 9){
-        return "September"
-    }
-    else if(date.getMonth() + 1 == 10){
-        return "October"
-    }
-    else if(date.getMonth() + 1 == 11){
-        return "November"
-    }
-    else if(date.getMonth() + 1 == 12){
-        return "December"
-    }
-}
-function gettingWeek(){
-    const days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]
-    return days[new Date().getDay()]
-}
+// Today date start 
 let date = new Date()
 let dateYear = date.getFullYear()
-let dateMonth = gettingMonth()
-let dateWeek = gettingWeek()
+let dateMonth = new Date().toLocaleString('en-US', { month: 'long' })
+let dateWeek = new Date().toLocaleString('en-US', { weekday: 'short' })
 let dateday = date.getDate()
 todayDate.firstElementChild.innerHTML = `${dateWeek} ${dateday} ${dateMonth}`
 // Today date end
@@ -114,7 +70,7 @@ function applyCurrentFilter(){
         renderTodo(todo)
     }
 }
-// apply filter start
+// apply filter end
 
 
 // add todo start 
@@ -122,11 +78,12 @@ elTodoForm.addEventListener("submit", (e) => {
     e.preventDefault()
     if(elTodoInput.value.trim() == ""){
         alert("Text title cannot be empty")
+        return
     }
     
     let date = new Date()
     let dateYear = date.getFullYear()
-    let dateMonth = gettingMonth()
+    let dateMonth = new Date().toLocaleString('en-US', { month: 'long' })
     let dateday = date.getDate()
     let dateHour = date.getHours()
     let dateMin = date.getMinutes()
@@ -148,6 +105,9 @@ elTodoForm.addEventListener("submit", (e) => {
     localStorage.setItem("setTodo", JSON.stringify(todo))
     
     e.target.reset()
+    
+    elTodoDue.type = 'text'
+    elTodoDue.placeholder = 'Due date (optional)'
 })
 // add todo end 
 
@@ -156,9 +116,18 @@ elTodoForm.addEventListener("submit", (e) => {
 function renderTodo(arr){
     elList.innerHTML = ""
     
+    if (arr.length === 0) {
+        elList.innerHTML = `<li class="text-center text-slate-100 sm:text-[#193664] py-10 font-family text-[18px] min-[410px]:text-[20px] sm:text-[22px] opacity-60 select-none">No tasks yet — add one above ↑</li>`
+        progressTask()
+        elAllList.lastChild.textContent = todo.length
+        elProgressList.lastChild.textContent = todo.filter(item => !item.isCompleted).length
+        elDoneList.lastChild.textContent = todo.filter(item => item.isCompleted).length
+        return
+    }
+    
     arr.forEach((item, index) => {
         if (!item.createdTime) return
-
+        
         const dueDate = item.due ? new Date(item.due) : null;
         const isOverdue = dueDate && dueDate < new Date();
         
@@ -171,12 +140,14 @@ function renderTodo(arr){
         ).getTime()
         const timeTaken = item.completedTime ? item.completedTime - createdTimestamp : null
         let elItem = document.createElement("li")
-        elItem.className = "w-[98%] sm:p-2 p-1 sm:pl-1 pl-0 sm:px-1 px-1.5 pb-1.5 rounded-xl bg-gray-200 shadow-[0_3px_8px_rgba(0,0,0,0.5)]"
+        elItem.className = "w-[98%] sm:p-2 p-1 sm:pt-2 pt-1.5 sm:pl-1 pl-0 sm:px-1 px-1.5 pb-1.5 rounded-xl bg-gray-200 shadow-[0_3px_8px_rgba(0,0,0,0.5)]"
+        elItem.dataset.id = item.id
         
         elItem.innerHTML = `
             <div class="flex items-start gap-1 justify-between ${item.isCompleted ? " opacity-60" : "" }">
-                <div class="flex-1 min-w-0 flex items-start ml-3">
-                    <span class="flex-shrink-0 font-semibold max-[370px]:text-[17px] max-[410px]:text-[18px] sm:text-[24px] font-Mono pr-1">${index + 1}.</span>
+                <div class="flex-1 min-w-0 flex items-center ml-2">
+                    <span class="drag-handle flex-shrink-0 cursor-grab text-gray-400 text-[13px] min-[410px]:text-[18px] sm:text-[19px] mr-1.5 select-none">⠿</span>
+                    <span class="num-span flex-shrink-0 font-semibold max-[370px]:text-[17px] max-[410px]:text-[18px] sm:text-[24px] font-Mono pr-1">${index + 1}.</span>
                     <p class="max-[370px]:text-[15px] max-[410px]:text-[16px] sm:text-[22px] font-family leading-normal break-words flex-1 ${item.isCompleted ? "line-through opacity-45" : "" } ">${item.value}</p>
                 </div>
                     
@@ -244,7 +215,13 @@ function handleUpdateBtn(id){
         <form class="update-form max-w-[500px] mx-auto px-4 mb-3">
             <label class="w-full">
                 <span class="inline-block text-[23px] font-family mb-1">Task Description</span>
-                <input class="update-input w-full p-2  bg-white font-family text-[21px] rounded-xl outline-none focus:shadow-md focus:shadow-zinc-600 duration-400 shadow-[0_3px_8px_rgba(0,0,0,0.5)]" type="text" value="${findedUpdatedItem.value}" name="inputValue" placeholder="Add new task..." required aria-label="add new task" autocomplete="off">
+                <input class="update-input w-full p-2 bg-white font-family text-[21px] rounded-xl outline-none focus:shadow-md focus:shadow-zinc-600 duration-400 shadow-[0_3px_8px_rgba(0,0,0,0.5)]" 
+                    type="text" 
+                    value="${findedUpdatedItem.value}" 
+                    name="inputValue" 
+                    placeholder="Add new task..." 
+                    required aria-label="add new task" 
+                    autocomplete="off">
             </label>
                 
             <label class="w-full inline-block mt-5">
@@ -258,7 +235,9 @@ function handleUpdateBtn(id){
             </div>
         </form>
     `
-    
+    if (!findedUpdatedItem.due) {
+        setupDuePlaceholder(document.querySelector('.update-due'))
+    }
     let elUpdateForm = document.querySelector(".update-form")
     
     elUpdateForm.addEventListener('submit', (e) => {
@@ -271,7 +250,6 @@ function handleUpdateBtn(id){
         document.body.classList.remove("overflow-y-hidden")
         
         applyCurrentFilter()
-        // progressTask()
         localStorage.setItem("setTodo", JSON.stringify(todo))
     })
 }
@@ -286,7 +264,7 @@ function handleCancelBtn(){
     elModalWrapper.classList.add("scale-0")
     document.body.classList.remove("overflow-y-hidden")
 }
-// Update function start 
+// Update function end 
 
 
 // delete function start 
@@ -297,7 +275,7 @@ function handleDeleteBtn(id){
     progressTask()
     localStorage.setItem("setTodo", JSON.stringify(todo))
 }
-// delete function start 
+// delete function end 
 
 
 // complete start 
@@ -340,7 +318,7 @@ function progressTask(){
     progressBar.style.width = `${progress}%`
     stateNumber.innerHTML = `${completeTask} / ${totalTask}`
 }
-// progress Bar start
+// progress Bar end
 
 
 // clock start 
@@ -358,18 +336,23 @@ setInterval(() => {
 // clock end 
 
 // Confetti animation start
-const fireConfetti = () => {
-    playSuccessSound()
+let confettiInterval = null
 
+const fireConfetti = () => {
+    if (confettiInterval) clearInterval(confettiInterval)
+        
+    playSuccessSound()
+    
     const startTime = Date.now()
     
-    const interval = setInterval(() => {
+    confettiInterval = setInterval(() => {
         const elapsed = Date.now() - startTime
         if (elapsed >= 8000) {
-            clearInterval(interval)
+            clearInterval(confettiInterval)
+            confettiInterval = null
             return
         }
-
+        
         confetti({ particleCount: 15, angle: 60,  spread: 70, origin: { x: 0,   y: 0.8 } })
         confetti({ particleCount: 15, angle: 120, spread: 70, origin: { x: 1,   y: 0.8 } })
         confetti({ particleCount: 10, angle: 90,  spread: 100, origin: { x: 0.5, y: 0  } })
@@ -383,7 +366,7 @@ function playSuccessSound() {
     const audio = new Audio("./sound/fireworks.mp3")
     audio.volume = 0.8 
     audio.play()
-
+    
     setTimeout(() => {
         audio.pause()
         audio.currentTime = 0
@@ -391,32 +374,53 @@ function playSuccessSound() {
 }
 // Sound end
 
-// Show nice placeholder on load and handle date picker on mobile
-document.addEventListener('DOMContentLoaded', function () {
-    const dueInput = document.querySelector('.todo-due');
+
+// Reliable due date placeholder - works after adding tasks too
+document.addEventListener('DOMContentLoaded', () => {
+    setupDuePlaceholder(document.querySelector('.todo-due'))
+})
+function setupDuePlaceholder(input) {
+    if (!input) return
     
-    if (!dueInput) return;
-
-    function handleFocus() {
-        if (dueInput.type === 'text') {
-            dueInput.type = 'datetime-local';
-            // Optional: clear placeholder text when picker opens
-            dueInput.placeholder = '';
-        }
+    if (!input.value) {
+        input.type = 'text'
+        input.placeholder = 'Due date (optional)'
     }
-
-    function handleBlur() {
-        if (!dueInput.value) {
-            dueInput.type = 'text';
-            dueInput.placeholder = 'mm/dd/yyyy --:--';
-        }
-    }
-
-    dueInput.addEventListener('focus', handleFocus);
-    dueInput.addEventListener('blur', handleBlur);
     
-    // Initial state
-    if (!dueInput.value) {
-        dueInput.type = 'text';
+    input.addEventListener('focus', function () {
+        this.type = 'datetime-local'
+    })
+    
+    input.addEventListener('blur', function () {
+        if (!this.value) {
+            this.type = 'text'
+            this.placeholder = 'Due date (optional)'
+        }
+    })
+}
+
+// Drag to reorder start
+Sortable.create(elList, {
+    animation: 150,
+    handle: '.drag-handle',
+    ghostClass: 'opacity-30',
+    
+    onEnd: function (evt) {
+        if (currentFilter !== 'all') {
+            applyCurrentFilter()
+            return
+        }
+        if (evt.oldIndex === evt.newIndex) return
+        
+        const movedItem = todo.splice(evt.oldIndex, 1)[0]
+        todo.splice(evt.newIndex, 0, movedItem)
+        
+        localStorage.setItem("setTodo", JSON.stringify(todo))
+        
+        elList.querySelectorAll('li[data-id]').forEach((li, i) => {
+            const numSpan = li.querySelector('.num-span')
+            if (numSpan) numSpan.textContent = (i + 1) + '.'
+        })
     }
-});
+})
+// Drag to reorder end
