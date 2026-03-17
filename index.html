@@ -13,7 +13,7 @@
                 <span id="hrs" class="sm:w-[50px] w-[42px] sm:text-[67px] text-[52px] text-shadow inline-block text-center relative after:content-['HOURS'] sm:after:text-[15px] after:text-[13px] after:text-shadow-none after:text-[#2D455B] after:absolute after:-bottom-[9px] sm:after:left-[77%] after:left-[70%] after:-translate-x-1/2">00</span>
                 <span class="sm:w-[50px] w-[42px] pl-3 sm:pl-2 sm:text-[67px] text-[52px] mb-2 sm:ml-3 ml-0 inline-block text-slate-700 text-center relative">:</span>    
                 <span id="min" class="sm:w-[50px] w-[42px] sm:text-[67px] text-[52px] text-shadow inline-block text-center relative after:content-['MIN'] sm:after:text-[15px] after:text-[13px] after:text-shadow-none after:text-[#2D455B] after:absolute after:-bottom-[9px] sm:after:left-[77%] after:left-[70%] after:-translate-x-1/2">00</span>    
-                <span class="sm:w-[50px] w-[42px] pl-4 sm:pl-2 sm:text-[67px] text-[52px] mb-2 sm:ml-3 ml-0 inline-block text-slate-700 text-center relative">:</span>   
+                <span class="sm:w-[50px] w-[42px] pl-5 sm:pl-2 sm:text-[67px] text-[52px] mb-2 sm:ml-3 ml-0 inline-block text-slate-700 text-center relative">:</span>   
                 <span id="sec" class="sm:w-[50px] w-[42px] sm:text-[67px] text-[52px] text-shadow inline-block text-center relative after:content-['SEC'] sm:after:text-[15px] after:text-[13px] after:text-shadow-none after:text-[#2D455B] after:absolute after:-bottom-[9px] sm:after:left-[77%] after:left-[70%] after:-translate-x-1/2">00</span>
             </div>
         </div>
@@ -43,7 +43,11 @@
         <form class="todo-form sm:max-w-[600px] w-full sm:px-0 px-3  mx-auto  sm:flex sm:items-center sm:gap-2 sm:justify-between">
             <input class="todo-input w-full sm:mb-0 mb-2 sm:p-2 p-1 sm:pl-3 pl-2 bg-gray-200 font-family text-[21px] rounded-xl outline-none focus:shadow-md focus:shadow-cyan-800 duration-400 shadow-[0_2px_5px_rgba(0,0,0,0.5)]" type="text" name="inputValue" placeholder="Add new task..." required aria-label="add new task" autocomplete="off">
             <div class="flex items-center justify-between sm:w-[55%] w-full gap-2">
-                <input class="todo-due flex-1 min-w-0 text-[21px] sm:p-2 p-1 sm:pl-3 pl-2 bg-gray-200 font-family rounded-xl outline-none focus:shadow-md focus:shadow-cyan-800 duration-400 shadow-[0_2px_5px_rgba(0,0,0,0.5)]" type="datetime-local" name="inputDue" autocomplete="off">
+                <input class="todo-due flex-1 min-w-0 text-[21px] sm:p-2 p-1 sm:pl-3 pl-2 bg-gray-200 font-family rounded-xl outline-none focus:shadow-md focus:shadow-cyan-800 duration-400 shadow-[0_2px_5px_rgba(0,0,0,0.5)]" 
+                type="text" 
+                placeholder="mm/dd/yyyy --:--" 
+                name="inputDue" 
+                autocomplete="off">
                 <button class="flex-shrink-0 sm:w-[100px] w-[75px] sm:py-[7px] py-1 bg-[#12688D] rounded-xl shadow-[0_2px_5px_rgba(0,0,0,0.5)] duration-400 cursor-pointer" type="submit">
                     <span class=" text-white">
                         <img class="mx-auto" src="./images/save-icon.svg" alt="save-icon" width="33" height="33">
@@ -75,6 +79,6 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="./js/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@hiseb/confetti@2.1.0/dist/confetti.min.js"></script>
-
+    
 </body>
 </html>

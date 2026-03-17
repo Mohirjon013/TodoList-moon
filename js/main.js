@@ -390,3 +390,33 @@ function playSuccessSound() {
     }, 8000)
 }
 // Sound end
+
+// Show nice placeholder on load and handle date picker on mobile
+document.addEventListener('DOMContentLoaded', function () {
+    const dueInput = document.querySelector('.todo-due');
+    
+    if (!dueInput) return;
+
+    function handleFocus() {
+        if (dueInput.type === 'text') {
+            dueInput.type = 'datetime-local';
+            // Optional: clear placeholder text when picker opens
+            dueInput.placeholder = '';
+        }
+    }
+
+    function handleBlur() {
+        if (!dueInput.value) {
+            dueInput.type = 'text';
+            dueInput.placeholder = 'mm/dd/yyyy --:--';
+        }
+    }
+
+    dueInput.addEventListener('focus', handleFocus);
+    dueInput.addEventListener('blur', handleBlur);
+    
+    // Initial state
+    if (!dueInput.value) {
+        dueInput.type = 'text';
+    }
+});

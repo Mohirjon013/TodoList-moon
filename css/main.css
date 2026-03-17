@@ -92,10 +92,25 @@ body::-webkit-scrollbar {
 
 
 
-input[type="datetime-local"] {
-    color: #1e293b;
+
+
+
+
+
+
+
+
+
+.todo-due {
+    color: #374151;                    /* dark color when has real value */
 }
 
-input[type="datetime-local"]::-webkit-datetime-edit {
-    color: #1e293b;
+/* Show placeholder style when empty */
+.todo-due:placeholder-shown {
+    color: #6b7280;                    /* gray color for placeholder */
+}
+
+/* When user taps, it becomes datetime picker */
+.todo-due:focus {
+    color: #374151;
 }
