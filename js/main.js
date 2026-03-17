@@ -175,12 +175,12 @@ function renderTodo(arr){
         
         elItem.innerHTML = `
             <div class="flex items-start gap-1 justify-between ${item.isCompleted ? " opacity-60" : "" }">
-                <div class="w-[85%] flex items-start ml-3">
-                    <span class="flex-shrink-0 font-semibold max-[370px]:text-[17px] max-[410px]:text-[18px] sm:text-[24px] font-Mono mt-1 pr-1">${index + 1}.</span>
+                <div class="flex-1 min-w-0 flex items-start ml-3">
+                    <span class="flex-shrink-0 font-semibold max-[370px]:text-[17px] max-[410px]:text-[18px] sm:text-[24px] font-Mono pr-1">${index + 1}.</span>
                     <p class="max-[370px]:text-[15px] max-[410px]:text-[16px] sm:text-[22px] font-family leading-normal break-words flex-1 ${item.isCompleted ? "line-through opacity-45" : "" } ">${item.value}</p>
                 </div>
                     
-                <div class="max-w-[220px] flex gap-1">
+                <div class="flex-shrink-0 flex gap-1">
                     <button onclick="handleCompletedBtn(${item.id})" class="done-btn hover:scale-115 duration-400 cursor-pointer ${item.isCompleted ? "hidden" : "block" }">
                         <img src="./images/done-icon.svg" alt="done-icon" width="37" height="37">
                     </button>
@@ -196,7 +196,7 @@ function renderTodo(arr){
                 </div>
             </div>
         
-            <div class="flex sm:flex-nowrap flex-wrap items-center ml-2 sm:mt-3 mt-2 sm:justify-start justify-between ${item.isCompleted ? " opacity-60 sm:justify-around justify-around" : "sm:gap-4 gap-1"} ${item.isCompleted && timeTaken ? "sm:justify-start  justify-around sm:gap-4 gap-1" : ""}">
+            <div class="flex sm:flex-nowrap flex-wrap items-center ml-2 sm:mt-3 mt-2 sm:justify-start justify-start gap-2 sm:gap-4 ${item.isCompleted ? "opacity-60" : ""}">
         
         
                 <p class="sm:text-[11px] max-[370px]:text-[7px] max-[450px]:text-[10px] font-Mono sm:py-0 py-1">Created: ${String(item.createdTime.dateday).padStart(2,0)} ${item.createdTime.dateMonth} ${item.createdTime.dateYear} ${String(item.createdTime.dateHour).padStart(2,0)}:${String(item.createdTime.dateMin).padStart(2,0)} </p>

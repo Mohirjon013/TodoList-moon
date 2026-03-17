@@ -11,16 +11,16 @@
         <div class="sm:max-w-[400px] max-w-[280px] sm:max-h-[130px] max-h-[100px] m-auto absolute inset-0 ">
             <div class="w-full h-full pr-6 flex items-center justify-center pb-3 bg-[#C0CDE4]/45 rounded-xl backdrop-blur-[40px] shadow-[0_0_20px_rgba(0,0,0,0.5)] border-white/18 relative z-20">
                 <span id="hrs" class="sm:w-[50px] w-[42px] sm:text-[67px] text-[52px] text-shadow inline-block text-center relative after:content-['HOURS'] sm:after:text-[15px] after:text-[13px] after:text-shadow-none after:text-[#2D455B] after:absolute after:-bottom-[9px] sm:after:left-[77%] after:left-[70%] after:-translate-x-1/2">00</span>
-                <span class="sm:w-[50px] w-[42px] sm:pl-2 pl-1.5 sm:text-[67px] text-[52px] mb-2 sm:ml-3 ml-0 inline-block text-slate-700 text-center relative">:</span>    
+                <span class="sm:w-[50px] w-[42px] sm:pl-2 pl-3 sm:text-[67px] text-[52px] mb-2 sm:ml-3 ml-0 inline-block text-slate-700 text-center relative">:</span>    
                 <span id="min" class="sm:w-[50px] w-[42px] sm:text-[67px] text-[52px] text-shadow inline-block text-center relative after:content-['MIN'] sm:after:text-[15px] after:text-[13px] after:text-shadow-none after:text-[#2D455B] after:absolute after:-bottom-[9px] sm:after:left-[77%] after:left-[70%] after:-translate-x-1/2">00</span>    
-                <span class="sm:w-[50px] w-[42px] sm:pl-2 pl-1.5 sm:text-[67px] text-[52px] mb-2 sm:ml-3 ml-0 inline-block text-slate-700 text-center relative">:</span>   
+                <span class="sm:w-[50px] w-[42px] sm:pl-2 pl-3 sm:text-[67px] text-[52px] mb-2 sm:ml-3 ml-0 inline-block text-slate-700 text-center relative">:</span>   
                 <span id="sec" class="sm:w-[50px] w-[42px] sm:text-[67px] text-[52px] text-shadow inline-block text-center relative after:content-['SEC'] sm:after:text-[15px] after:text-[13px] after:text-shadow-none after:text-[#2D455B] after:absolute after:-bottom-[9px] sm:after:left-[77%] after:left-[70%] after:-translate-x-1/2">00</span>
             </div>
         </div>
     </div>
     
     <div class="todo-app  max-w-[700px] mx-auto sm:mt-7 mt-4 backdrop-blur-lg am:py-5 py-3 rounded-[20px] shadow-[0_0_100px_rgba(0,0,0,0.5)] border-3 border-white/18">
-        <div class="sm:mx-10 mx-5 mb-9 sm:flex sm:items-center sm:gap-3 sm:justify-between">
+        <div class="sm:mx-10 mx-5 sm:mb-9 mb-4 sm:flex sm:items-center sm:gap-3 sm:justify-between">
             <div class="sm:w-[300px] w-full mx-auto font-family sm:mb-0 mb-5">
                 <span class="block text-[#112240] max-[4500px]:text-[28px] max-[370px]:text-[22px] sm:text-[19px] text-bold sm:text-start text-center">Task Management</span>
                 <h1 class=" font-bold max-[370px]:text-[55px] max-[450px]:text-[65px] sm:text-[50px]  sm:text-start text-center text-[#F8FAFC] sm:leading-[58px] max-[450px]:leading-[45px] max-[370px]:leading-[45px] mb-5">Mo<em>men</em>tum</h1>
@@ -40,11 +40,11 @@
             </div>
         </div>
         
-        <form class="todo-form sm:max-w-[600px] w-full sm:px-0 px-5  mx-auto  sm:flex sm:items-center sm:gap-2 sm:justify-between">
+        <form class="todo-form sm:max-w-[600px] w-full sm:px-0 px-3  mx-auto  sm:flex sm:items-center sm:gap-2 sm:justify-between">
             <input class="todo-input w-full sm:mb-0 mb-2 sm:p-2 p-1 sm:pl-3 pl-2 bg-gray-200 font-family text-[21px] rounded-xl outline-none focus:shadow-md focus:shadow-cyan-800 duration-400 shadow-[0_2px_5px_rgba(0,0,0,0.5)]" type="text" name="inputValue" placeholder="Add new task..." required aria-label="add new task" autocomplete="off">
             <div class="flex items-center justify-between sm:w-[55%] w-full gap-2">
-                <input class="todo-due w-[75%] text-[21px] sm:p-2 p-1 sm:pl-3 pl-2 bg-gray-200 font-family rounded-xl outline-none focus:shadow-md focus:shadow-cyan-800 duration-400 shadow-[0_2px_5px_rgba(0,0,0,0.5)]" type="datetime-local" name="inputDue" autocomplete="off">
-                <button class="sm:w-[130px] w-[110px] sm:py-[7px] py-1 bg-[#12688D] rounded-xl shadow-[0_2px_5px_rgba(0,0,0,0.5)] duration-400 cursor-pointer" type="submit">
+                <input class="todo-due flex-1 min-w-0 text-[21px] sm:p-2 p-1 sm:pl-3 pl-2 bg-gray-200 font-family rounded-xl outline-none focus:shadow-md focus:shadow-cyan-800 duration-400 shadow-[0_2px_5px_rgba(0,0,0,0.5)]" type="datetime-local" name="inputDue" autocomplete="off">
+                <button class="sm:w-[100px] w-[75px] sm:py-[7px] py-1 bg-[#12688D] rounded-xl shadow-[0_2px_5px_rgba(0,0,0,0.5)] duration-400 cursor-pointer" type="submit">
                     <span class=" text-white">
                         <img class="mx-auto" src="./images/save-icon.svg" alt="save-icon" width="33" height="33">
                     </span>
@@ -52,10 +52,10 @@
             </div>
         </form>
         
-        <div class="max-w-[600px] sm:mx-auto mx-3 mt-5 flex sm:flex-nowrap flex-wrap items-center sm:gap-6 gap-1 sm:justify-between font-family">
-            <div onclick="handleAllListBox()" class="all-list sm:w-[33%] w-[49%] sm:p-1.5 p-1 rounded-xl text-center text-[18px] border-2 shadow-[0_1px_10px_rgba(0,0,0,0.5)] border-slate-400 bg-white cursor-pointer hover:scale-115 duration-400">All List: <span class="text-[26px] leading-[22px]">2</span></div>
-            <div onclick="handleProgressListBox()"  class="progress-list sm:w-[33%] w-[49%] sm:p-1.5 p-1 rounded-xl text-center text-[18px] border-2 shadow-[0_1px_10px_rgba(0,0,0,0.5)] border-slate-400 bg-white cursor-pointer hover:scale-115 duration-400">On Progress: <span class="text-[26px] leading-[22px]"></span></div>
-            <div onclick="handleDoneListBox()"  class="done-list sm:w-[33%] w-full sm:p-1.5 p-1 rounded-xl text-center text-[18px] border-2 shadow-[0_1px_10px_rgba(0,0,0,0.5)] border-slate-400 bg-white cursor-pointer hover:scale-115 duration-400">Todo Done: <span class="text-[26px] leading-[22px]">2</span></div>
+        <div class="max-w-[600px] sm:mx-auto mx-3 mt-5 flex sm:flex-nowrap flex-wrap items-center sm:gap-6 gap-2 sm:justify-between font-family">
+            <div onclick="handleAllListBox()" class="all-list sm:w-[33%] w-[calc(50%-4px)] sm:p-1.5 p-1 rounded-xl text-center text-[18px] border-2 shadow-[0_1px_10px_rgba(0,0,0,0.5)] border-slate-400 bg-white cursor-pointer sm:hover:scale-115 hover:scale-105 duration-400">All List: <span class="text-[26px] leading-[22px]">0</span></div>
+            <div onclick="handleProgressListBox()"  class="progress-list sm:w-[33%] w-[calc(50%-4px)] sm:p-1.5 p-1 rounded-xl text-center text-[18px] border-2 shadow-[0_1px_10px_rgba(0,0,0,0.5)] border-slate-400 bg-white cursor-pointer sm:hover:scale-115 hover:scale-105 duration-400">On Progress: <span class="text-[26px] leading-[22px]"></span></div>
+            <div onclick="handleDoneListBox()"  class="done-list sm:w-[33%] w-full sm:p-1.5 p-1 rounded-xl text-center text-[18px] border-2 shadow-[0_1px_10px_rgba(0,0,0,0.5)] border-slate-400 bg-white cursor-pointer sm:hover:scale-115 hover:scale-105 duration-400">Todo Done: <span class="text-[26px] leading-[22px]">0</span></div>
         </div>
         
         <ul class="todo-list max-h-[345px] overflow-y-auto max-w-[600px] sm:mx-auto mx-2 mt-5 py-3 rounded-xl backdrop-blur-lg space-y-3"></ul>
@@ -72,8 +72,8 @@
     
     
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="./js/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="./js/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@hiseb/confetti@2.1.0/dist/confetti.min.js"></script>
 
 </body>
