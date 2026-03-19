@@ -145,12 +145,14 @@ function renderTodo(arr){
         
         elItem.innerHTML = `
             <div class="flex items-start gap-1 justify-between ${item.isCompleted ? " opacity-60" : "" }">
-                <div class="flex-1 min-w-0 flex items-start ml-2">
-                    <div class="flex items-center">
-                        <span class="drag-handle flex-shrink-0 cursor-grab text-gray-400 text-[13px] min-[410px]:text-[18px] sm:text-[19px] mr-1.5 select-none">⠿</span>
-                        <span class="num-span flex-shrink-0 font-semibold max-[370px]:text-[17px] max-[410px]:text-[18px] sm:text-[24px] font-Mono pr-1 ">${index + 1}.</span>
+                <div class="flex-1 min-w-0 flex items-start">
+                    <div class="flex items-center flex-shrink-0 gap-2 ml-2">
+                        <div class="py-4 -my-4  drag-handle cursor-grab select-none">
+                            <span class="text-gray-400 text-[23px] sm:text-[25px]">⠿</span>
+                        </div>
+                        <span class="num-span select-none flex-shrink-0 font-semibold max-[370px]:text-[17px] max-[410px]:text-[18px] sm:text-[24px] font-Mono">${index + 1}.</span>
                     </div>
-                    <p class="max-[370px]:text-[15px] max-[410px]:text-[16px] sm:text-[22px] font-family leading-normal break-words flex-1 ${item.isCompleted ? "line-through opacity-45" : "" } ">${item.value}</p>
+                    <p class="flex-1 min-w-0 sm:ml-1 ml-0 max-[370px]:text-[15px] max-[410px]:text-[16px] sm:text-[22px] font-family sm:mt-0 mt-0.5 break-words ${item.isCompleted ? "line-through opacity-45" : ""}">${item.value}</p>
                 </div>
                     
                 <div class="flex-shrink-0 flex gap-1">
