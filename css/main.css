@@ -65,7 +65,9 @@ body{
   color: #3c607e;
   text-shadow: 2.5px 2.5px 0px rgb(205, 211, 213);
 }
-
+.todo-list {
+  overflow-x: hidden;
+}
 
 /* ---- ScrollBar ----- */
 body::-webkit-scrollbar {

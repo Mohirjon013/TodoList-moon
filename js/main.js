@@ -117,7 +117,7 @@ function renderTodo(arr){
     elList.innerHTML = ""
     
     if (arr.length === 0) {
-        elList.innerHTML = `<li class="text-center text-slate-100 sm:text-[#193664] py-10 font-family text-[18px] min-[410px]:text-[20px] sm:text-[22px] opacity-60 select-none">No tasks yet — add one above ↑</li>`
+        elList.innerHTML = `<li class="text-center text-slate-100 sm:text-[#193664] py-4.5 min-[410px]:py-5 sm:py-6 font-family text-[18px] min-[410px]:text-[20px] sm:text-[22px] opacity-60 select-none">No tasks yet — add one above ↑</li>`
         progressTask()
         elAllList.lastChild.textContent = todo.length
         elProgressList.lastChild.textContent = todo.filter(item => !item.isCompleted).length
@@ -145,9 +145,11 @@ function renderTodo(arr){
         
         elItem.innerHTML = `
             <div class="flex items-start gap-1 justify-between ${item.isCompleted ? " opacity-60" : "" }">
-                <div class="flex-1 min-w-0 flex items-center ml-2">
-                    <span class="drag-handle flex-shrink-0 cursor-grab text-gray-400 text-[13px] min-[410px]:text-[18px] sm:text-[19px] mr-1.5 select-none">⠿</span>
-                    <span class="num-span flex-shrink-0 font-semibold max-[370px]:text-[17px] max-[410px]:text-[18px] sm:text-[24px] font-Mono pr-1">${index + 1}.</span>
+                <div class="flex-1 min-w-0 flex items-start ml-2">
+                    <div class="flex items-center">
+                        <span class="drag-handle flex-shrink-0 cursor-grab text-gray-400 text-[13px] min-[410px]:text-[18px] sm:text-[19px] mr-1.5 select-none">⠿</span>
+                        <span class="num-span flex-shrink-0 font-semibold max-[370px]:text-[17px] max-[410px]:text-[18px] sm:text-[24px] font-Mono pr-1 ">${index + 1}.</span>
+                    </div>
                     <p class="max-[370px]:text-[15px] max-[410px]:text-[16px] sm:text-[22px] font-family leading-normal break-words flex-1 ${item.isCompleted ? "line-through opacity-45" : "" } ">${item.value}</p>
                 </div>
                     
@@ -226,7 +228,7 @@ function handleUpdateBtn(id){
                 
             <label class="w-full inline-block mt-5">
                 <span class="inline-block text-[23px] font-family mb-1">Due Date</span>
-                <input class="update-due w-full text-[21px] p-2 pl-3 bg-white font-family rounded-xl outline-none focus:shadow-md focus:shadow-zinc-600 duration-400 shadow-[0_3px_8px_rgba(0,0,0,0.5)]" type="datetime-local" value="${findedUpdatedItem.due}" name="inputDue" autocomplete="off">
+                <input class="update-due w-full text-[21px] p-2 pl-3 bg-white font-family rounded-xl outline-none focus:shadow-md focus:shadow-zinc-600 duration-400 shadow-[0_3px_8px_rgba(0,0,0,0.5)]" type="datetime-local" value="${findedUpdatedItem.due || ''}" name="inputDue" autocomplete="off">
             </label>
                     
             <div class="mt-9 flex items-center justify-between">
@@ -375,7 +377,7 @@ function playSuccessSound() {
 // Sound end
 
 
-// Reliable due date placeholder - works after adding tasks too
+// Reliable due date placeholder start
 document.addEventListener('DOMContentLoaded', () => {
     setupDuePlaceholder(document.querySelector('.todo-due'))
 })
@@ -398,10 +400,13 @@ function setupDuePlaceholder(input) {
         }
     })
 }
+// Reliable due date placeholder end
+
+
 
 // Drag to reorder start
 Sortable.create(elList, {
-    animation: 150,
+    animation: 200,
     handle: '.drag-handle',
     ghostClass: 'opacity-30',
     
