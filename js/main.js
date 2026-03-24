@@ -104,10 +104,9 @@ elTodoForm.addEventListener("submit", (e) => {
     progressTask()
     localStorage.setItem("setTodo", JSON.stringify(todo))
     
-    e.target.reset()
-    
     elTodoDue.type = 'text'
     elTodoDue.placeholder = 'Due date (optional)'
+    e.target.reset()
 })
 // add todo end 
 
@@ -244,7 +243,7 @@ function handleUpdateBtn(id){
     }
     let elUpdateForm = document.querySelector(".update-form")
     
-    elUpdateForm.addEventListener('submit', (e) => {
+    elUpdateForm.onsubmit = (e) => {
         e.preventDefault()
         
         findedUpdatedItem.value = e.target.inputValue.value
@@ -255,7 +254,7 @@ function handleUpdateBtn(id){
         
         applyCurrentFilter()
         localStorage.setItem("setTodo", JSON.stringify(todo))
-    })
+    }
 }
 
 elModalWrapper.addEventListener("click", function(e){
@@ -320,7 +319,7 @@ function progressTask(){
     const progress = totalTask > 0 ? (completeTask / totalTask) * 100 : 0
     
     progressBar.style.width = `${progress}%`
-    stateNumber.innerHTML = `${completeTask} / ${totalTask}`
+    stateNumber.textContent = `${completeTask} / ${totalTask}`
 }
 // progress Bar end
 
@@ -366,14 +365,20 @@ const fireConfetti = () => {
 
 
 // Sound start
+let currentAudio = null
+
 function playSuccessSound() {
-    const audio = new Audio("./sound/fireworks.mp3")
-    audio.volume = 0.8 
-    audio.play()
+    if (currentAudio) {
+        currentAudio.pause()
+        currentAudio.currentTime = 0
+    }
+    currentAudio = new Audio("./sound/fireworks.mp3")
+    currentAudio.volume = 0.8
+    currentAudio.play()
     
     setTimeout(() => {
-        audio.pause()
-        audio.currentTime = 0
+        currentAudio.pause()
+        currentAudio.currentTime = 0
     }, 8000)
 }
 // Sound end
