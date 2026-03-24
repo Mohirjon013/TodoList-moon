@@ -17,7 +17,6 @@ const elModalContent = document.querySelector(".modal-content")
 const elUpdateForm = document.querySelector(".update-form")
 const elUpdateDue = document.querySelector(".update-due")
 
-
 const todayDate = document.querySelector(".today-date")
 
 let currentFilter = 'all'
@@ -60,7 +59,7 @@ todayDate.firstElementChild.innerHTML = `${dateWeek} ${dateday} ${dateMonth}`
 
 // apply filter start
 function applyCurrentFilter(){
-    if(currentFilter == "done"){
+    if(currentFilter === "done"){
         renderTodo(todo.filter(item => item.isCompleted))
     }
     else if(currentFilter == "progress"){
@@ -80,7 +79,12 @@ elTodoForm.addEventListener("submit", (e) => {
         alert("Text title cannot be empty")
         return
     }
-    
+    elTodoInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+            e.preventDefault(); // prevent moving to "due" field
+            elTodoForm.requestSubmit(); // triggers your existing submit event
+        }
+    });
     let date = new Date()
     let dateYear = date.getFullYear()
     let dateMonth = new Date().toLocaleString('en-US', { month: 'long' })
@@ -114,6 +118,8 @@ elTodoForm.addEventListener("submit", (e) => {
 // render todo start
 function renderTodo(arr){
     elList.innerHTML = ""
+    
+    const fragment = document.createDocumentFragment()
     
     if (arr.length === 0) {
         elList.innerHTML = `<li class="text-center text-slate-100 sm:text-[#193664] py-4.5 min-[410px]:py-5 sm:py-6 font-family text-[18px] min-[410px]:text-[20px] sm:text-[22px] opacity-60 select-none">No tasks yet — add one above ↑</li>`
@@ -195,10 +201,11 @@ function renderTodo(arr){
                 ` : ''}
             </div>
         `
-        elList.appendChild(elItem)
+        fragment.appendChild(elItem)
         
     });
     
+    elList.append(fragment)
     progressTask()
     elAllList.lastChild.textContent = todo.length
     elProgressList.lastChild.textContent = todo.filter(item => !item.isCompleted).length
@@ -208,7 +215,7 @@ renderTodo(todo)
 // render todo end
 
 
-// Update function start 
+// Update function start
 function handleUpdateBtn(id){
     elModalWrapper.classList.remove("scale-0")
     document.body.classList.add("overflow-y-hidden")
