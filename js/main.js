@@ -75,26 +75,23 @@ function applyCurrentFilter(){
 // add todo start 
 elTodoForm.addEventListener("submit", (e) => {
     e.preventDefault()
+    
     if(elTodoInput.value.trim() == ""){
         alert("Text title cannot be empty")
         return
     }
-    elTodoInput.addEventListener("keydown", (e) => {
-        if (e.key === "Enter") {
-            e.preventDefault(); // prevent moving to "due" field
-            elTodoForm.requestSubmit(); // triggers your existing submit event
-        }
-    });
+    
     let date = new Date()
+    
     let dateYear = date.getFullYear()
-    let dateMonth = new Date().toLocaleString('en-US', { month: 'long' })
+    let dateMonth = date.toLocaleString('en-US', { month: 'long' })
     let dateday = date.getDate()
     let dateHour = date.getHours()
     let dateMin = date.getMinutes()
     
     const data = {
         id: Date.now(),
-        value: elTodoInput.value,
+        value: elTodoInput.value.trim(),
         due: elTodoDue.value || null,
         createdTime:{
             dateYear,dateMonth,dateday,dateHour, dateMin
@@ -112,17 +109,25 @@ elTodoForm.addEventListener("submit", (e) => {
     elTodoDue.placeholder = 'Due date (optional)'
     e.target.reset()
 })
+elTodoInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+        e.preventDefault(); 
+        elTodoForm.requestSubmit();
+    }
+});
 // add todo end 
 
 
 // render todo start
-function renderTodo(arr){
-    elList.innerHTML = ""
-    
+function renderTodo(arr){    
     const fragment = document.createDocumentFragment()
     
     if (arr.length === 0) {
-        elList.innerHTML = `<li class="text-center text-slate-100 sm:text-[#193664] py-4.5 min-[410px]:py-5 sm:py-6 font-family text-[18px] min-[410px]:text-[20px] sm:text-[22px] opacity-60 select-none">No tasks yet — add one above ↑</li>`
+        const li = document.createElement("li")
+        li.className = "text-center text-slate-100 sm:text-[#193664] py-4.5 min-[410px]:py-5 sm:py-6 font-family text-[18px] min-[410px]:text-[20px] sm:text-[22px] opacity-60 select-none"
+        li.textContent = "No tasks yet — add one above ↑"
+        
+        elList.replaceChildren(li)
         progressTask()
         elAllList.lastChild.textContent = todo.length
         elProgressList.lastChild.textContent = todo.filter(item => !item.isCompleted).length
@@ -132,9 +137,9 @@ function renderTodo(arr){
     
     arr.forEach((item, index) => {
         if (!item.createdTime) return
-        
+        const now = new Date()
         const dueDate = item.due ? new Date(item.due) : null;
-        const isOverdue = dueDate && dueDate < new Date();
+        const isOverdue = dueDate && dueDate < now
         
         const createdTimestamp = new Date(
             item.createdTime.dateYear,
@@ -161,16 +166,16 @@ function renderTodo(arr){
                 </div>
                     
                 <div class="flex-shrink-0 flex gap-1">
-                    <button onclick="handleCompletedBtn(${item.id})" class="done-btn hover:scale-115 duration-400 cursor-pointer ${item.isCompleted ? "hidden" : "block" }">
+                    <button class="complete-btn hover:scale-115 duration-400 cursor-pointer ${item.isCompleted ? "hidden" : "block" }">
                         <img class="w-[25px] h-[25px] min-[390px]:w-[29px] min-[390px]:h-[29px] sm:w-[37px] sm:h-[37px]" src="./images/done-icon.svg" alt="done-icon" width="37" height="37">
                     </button>
-                    <button onclick="handleCompletedBtn(${item.id})" class="done-btn hover:scale-115 duration-400 cursor-pointer ${item.isCompleted ? "block" : "hidden" } ">
+                    <button class="undo-btn hover:scale-115 duration-400 cursor-pointer ${item.isCompleted ? "block" : "hidden" } ">
                         <img class="w-[25px] h-[25px] min-[390px]:w-[29px] min-[390px]:h-[29px] sm:w-[37px] sm:h-[37px]" src="./images/complete-icon.svg" alt="done-icon" width="37" height="37">
                     </button>
-                    <button onclick="handleDeleteBtn(${item.id})" class="delete-btn hover:scale-115 duration-400 cursor-pointer" type="button">
+                    <button class="delete-btn hover:scale-115 duration-400 cursor-pointer" type="button">
                         <img class="w-[25px] h-[25px] min-[390px]:w-[29px] min-[390px]:h-[29px] sm:w-[37px] sm:h-[37px]" src="./images/delete-icon.svg" alt="de-icon" width="37" height="37">
                     </button>
-                    <button onclick="handleUpdateBtn(${item.id})" type="button" class="update-btn ${item.isCompleted ? 'opacity-50 cursor-not-allowed' : "hover:scale-115 duration-400 cursor-pointer"}" ${item.isCompleted ? 'disabled' : ""} >
+                    <button type="button" class="update-btn ${item.isCompleted ? 'opacity-50 cursor-not-allowed' : "hover:scale-115 duration-400 cursor-pointer"}" ${item.isCompleted ? 'disabled' : ""} >
                         <img class="w-[23px] h-[23px] min-[390px]:w-[27px] min-[390px]:h-[27px] sm:w-[35px] sm:h-[35px]" src="./images/edit-icons.svg" alt="edit-icon" width="36" height="36">
                     </button>
                 </div>
@@ -205,7 +210,7 @@ function renderTodo(arr){
         
     });
     
-    elList.append(fragment)
+    elList.replaceChildren(fragment)
     progressTask()
     elAllList.lastChild.textContent = todo.length
     elProgressList.lastChild.textContent = todo.filter(item => !item.isCompleted).length
@@ -214,13 +219,35 @@ function renderTodo(arr){
 renderTodo(todo)
 // render todo end
 
+elList.addEventListener("click", (e) => {  
+    const li = e.target.closest("li")  
+    if (!li) return  
+    
+    const id = Number(li.dataset.id)  
+    
+    if (e.target.closest(".delete-btn")) {  
+        handleDeleteBtn(id)  
+    }  
+    
+    if (e.target.closest(".complete-btn")) {  
+        handleCompletedBtn(id)  
+    }  
+    
+    if (e.target.closest(".undo-btn")) {  
+        handleCompletedBtn(id)  
+    }  
+    
+    if (e.target.closest(".update-btn")) {  
+        handleUpdateBtn(id)  
+    }  
+})
 
 // Update function start
 function handleUpdateBtn(id){
     elModalWrapper.classList.remove("scale-0")
     document.body.classList.add("overflow-y-hidden")
     
-    const findedUpdatedItem = todo.find(item => item.id == id)
+    const findedUpdatedItem = todo.find(item => item.id === id)
     elModalContent.innerHTML = `
         <form class="update-form max-w-[500px] mx-auto px-4 mb-3">
             <label class="w-full">
@@ -279,7 +306,7 @@ function handleCancelBtn(){
 
 // delete function start 
 function handleDeleteBtn(id){
-    const findedDeleteIndex = todo.findIndex(item => item.id == id)
+    const findedDeleteIndex = todo.findIndex(item => item.id === id)
     todo.splice(findedDeleteIndex, 1)
     applyCurrentFilter()
     progressTask()
@@ -290,7 +317,7 @@ function handleDeleteBtn(id){
 
 // complete start 
 function handleCompletedBtn(id){
-    const findCompletedObj = todo.find(item => item.id == id)
+    const findCompletedObj = todo.find(item => item.id === id)
     findCompletedObj.isCompleted = !findCompletedObj.isCompleted
     findCompletedObj.completedTime = findCompletedObj.isCompleted ? Date.now() : null
     
