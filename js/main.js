@@ -102,7 +102,6 @@ elTodoForm.addEventListener("submit", (e) => {
     
     todo.push(data)
     applyCurrentFilter()
-    progressTask()
     localStorage.setItem("setTodo", JSON.stringify(todo))
     
     elTodoDue.type = 'text'
@@ -119,7 +118,7 @@ elTodoInput.addEventListener("keydown", (e) => {
 
 
 // render todo start
-function renderTodo(arr){    
+function renderTodo(arr){
     const fragment = document.createDocumentFragment()
     
     if (arr.length === 0) {
@@ -309,7 +308,6 @@ function handleDeleteBtn(id){
     const findedDeleteIndex = todo.findIndex(item => item.id === id)
     todo.splice(findedDeleteIndex, 1)
     applyCurrentFilter()
-    progressTask()
     localStorage.setItem("setTodo", JSON.stringify(todo))
 }
 // delete function end 
@@ -321,11 +319,10 @@ function handleCompletedBtn(id){
     findCompletedObj.isCompleted = !findCompletedObj.isCompleted
     findCompletedObj.completedTime = findCompletedObj.isCompleted ? Date.now() : null
     
-    const allDone = todo.length > 0 && todo.every(item => item.isCompleted)
+    const allDone = todo.length > 2 && todo.every(item => item.isCompleted)
     if (allDone) fireConfetti()
         
     applyCurrentFilter()
-    progressTask()
     localStorage.setItem("setTodo", JSON.stringify(todo))
 }
 
@@ -419,9 +416,8 @@ function playSuccessSound() {
 
 
 // Reliable due date placeholder start
-document.addEventListener('DOMContentLoaded', () => {
-    setupDuePlaceholder(document.querySelector('.todo-due'))
-})
+setupDuePlaceholder(document.querySelector('.todo-due'))
+
 function setupDuePlaceholder(input) {
     if (!input) return
     
@@ -454,6 +450,7 @@ Sortable.create(elList, {
     onEnd: function (evt) {
         if (currentFilter !== 'all') {
             applyCurrentFilter()
+            alert("Reordering only works in All view.")
             return
         }
         if (evt.oldIndex === evt.newIndex) return
