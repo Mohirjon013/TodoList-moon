@@ -1,4 +1,4 @@
-import { auth, db, provider, signInWithPopup, signOut, onAuthStateChanged, collection, doc, setDoc, deleteDoc, onSnapshot } from "./firebase.js"
+import { auth, db, provider, signInWithPopup, signOut, onAuthStateChanged, collection, doc, setDoc, deleteDoc, onSnapshot, getDoc } from "./firebase.js"
 
 // Selecting elements
 const loginScreen = document.getElementById("login-screen")
@@ -16,6 +16,10 @@ const elAllList = document.querySelector(".all-list")
 const elProgressList = document.querySelector(".progress-list")
 const elDoneList = document.querySelector(".done-list")
 
+const telegramBtn = document.getElementById("telegram-btn")
+const telegramBtnText = document.getElementById("telegram-btn-text")
+const finishDayBtn = document.getElementById("finish-day-btn")
+
 const progressBar = document.querySelector(".progress")
 const stateNumber = document.querySelector(".numbers")
 
@@ -23,7 +27,6 @@ const elModalWrapper = document.querySelector(".modal-wrapper")
 const elModalContent = document.querySelector(".modal-content")
 
 const todayDate = document.querySelector(".today-date")
-
 
 let currentFilter = 'all'
 
@@ -283,7 +286,7 @@ function handleUpdateBtn(id){
         </form>
     `
     elModalContent.querySelector(".cancel-btn").addEventListener("click", handleCancelBtn)
-
+    
     if (!findedUpdatedItem.due) {
         setupDuePlaceholder(document.querySelector('.update-due'))
     }
@@ -514,6 +517,43 @@ logoutBtn.addEventListener("click", async () => {
 // login Out end
 
 
+// Telegram connect start
+telegramBtn.addEventListener("click", async () => {
+    const chatId = prompt("Telegram botga /start yozing va chat_id ni kiriting:")
+    if (!chatId) return
+    await saveChatId(chatId.trim())
+    telegramBtnText.textContent = "Telegram ✅"
+})
+
+finishDayBtn.addEventListener("click", async () => {
+    const chatId = await loadChatId()
+    if (!chatId) {
+        alert("Avval Telegram ni ulang!")
+        return
+    }
+  
+    const now = new Date()
+    const dateStr = now.toLocaleString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
+    
+    let message = `📅 <b>Daily Report — ${dateStr}</b>\n\n`
+    
+    todo.forEach((item, i) => {
+        message += `${i + 1}. ${item.value} ${item.isCompleted ? "✅" : "❌"}\n`
+    })
+    
+    const completed = todo.filter(item => item.isCompleted).length
+    message += `\n📊 <b>Completed: ${completed} / ${todo.length}</b>`
+    
+    await fetch("/api/send-message", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ chatId, message })
+    })
+    alert("Telegramga yuborildi! 🎉")
+})
+// Telegram connect end
+
+
 // loadTodos start
 function loadTodos() {
     const todosRef = collection(db, "users", currentUserId, "todos")
@@ -536,3 +576,15 @@ async function saveTodo(item) {
 
 
 
+// Save chatId start
+async function saveChatId(chatId) {
+    const userRef = doc(db, "users", currentUserId, "profile", "telegram")
+    await setDoc(userRef, { chatId })
+}
+
+async function loadChatId() {
+    const userRef = doc(db, "users", currentUserId, "profile", "telegram")
+    const snap = await getDoc(userRef)
+    return snap.exists() ? snap.data().chatId : null
+}
+// Save chatId end

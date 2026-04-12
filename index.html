@@ -71,19 +71,30 @@
             <button class="progress-list sm:w-[33%] w-[calc(50%-4px)] sm:p-1.5 p-1 rounded-xl text-center text-[18px] border-2 shadow-[0_1px_10px_rgba(0,0,0,0.5)] border-slate-400 bg-white cursor-pointer sm:hover:scale-110 hover:scale-105 duration-400">On Progress: <span class="text-[26px] leading-[22px]">0</span></button>
             <button class="done-list sm:w-[33%] w-full sm:p-1.5 p-1 rounded-xl text-center text-[18px] border-2 shadow-[0_1px_10px_rgba(0,0,0,0.5)] border-slate-400 bg-white cursor-pointer sm:hover:scale-110 hover:scale-105 duration-400">Todo Done: <span class="text-[26px] leading-[22px]">0</span></button>
         </div>
-
+        
         <div class="max-w-[600px] sm:mx-auto mx-3 mt-5 flex sm:flex-nowrap flex-wrap items-center sm:gap-3 gap-2 sm:justify-between font-family">
-            <div class="w-[48%] flex justify-end">
-                <button id="logout-btn" class="group w-full cursor-pointer flex items-center justify-center gap-3 px-3 py-1 rounded-xl border-2 border-slate-400  text-[20px] font-medium bg-white hover:bg-red-500/10 backdrop-blur-2xl hover:border-red-400/50 text-white/90 hover:text-red-400 shadow-lg shadow-black/40 transition-all duration-400 ">
-                    
+            <div class="sm:w-[32%] w-[calc(50%-4px)] flex">
+                <button id="logout-btn" class="group flex-1 cursor-pointer flex items-center justify-center gap-2 px-3 py-1 rounded-xl border-2 border-slate-400 max-[340px]:text-[15px] text-[18px] font-medium bg-white hover:bg-red-500/10 hover:border-red-400/50 hover:text-red-400 shadow-lg shadow-black/40 transition-all duration-400">
                     <img src="./images/sign-out-icon.svg" alt="sign-out-icon" width="28" height="28">
-                    
                     <span class="text-[#112240] group-hover:text-white">Sign out</span>
                 </button>
             </div>
-           
-        </div>
 
+            <div class="sm:w-[32%] w-[calc(50%-4px)] flex">
+                <button id="finish-day-btn" class="group flex-1 cursor-pointer flex items-center justify-center gap-1.5 px-3 py-1 rounded-xl border-2 border-slate-400 max-[340px]:text-[15px] text-[18px] font-medium bg-white hover:bg-green-500/10 hover:border-green-400/50 shadow-lg shadow-black/40 transition-all duration-400">
+                    <img src="./images/checklist-icon.svg" alt="checklist-icon" width="28" height="28">
+                    <span class="text-[#112240] group-hover:text-white">Finish Day</span>
+                </button>
+            </div>
+
+            <div class="sm:w-[33%] w-full flex">
+                <button id="telegram-btn" class="group flex-1 cursor-pointer flex items-center justify-center gap-1.5 px-3 py-1 rounded-xl border-2 border-slate-400 max-[340px]:text-[15px] text-[18px] font-medium bg-white hover:bg-blue-500/10 hover:border-blue-400/50 shadow-lg shadow-black/40 transition-all duration-400">
+                    <img src="./images/telegram-icon.svg" alt="telegram-btn" width="28" height="28">
+                    <span id="telegram-btn-text" class="text-[#112240] group-hover:text-white">Connect Telegram</span>
+                </button>
+            </div>
+        </div>
+        
         <ul class="todo-list max-h-[345px] overflow-y-auto max-w-[600px] sm:mx-auto mx-2 mt-2 py-3 rounded-xl backdrop-blur-lg space-y-3"></ul>
     </div>
     
