@@ -9,6 +9,18 @@
     <link rel="stylesheet" href="./css/main.css">
 </head>
 <body>
+    <div id="login-screen" class="fixed inset-0 z-[100] flex items-center justify-center backdrop-blur-sm overflow-y-hidden" style="background:rgba(10,25,47,0.85)">
+        <div class=" w-full max-w-[400px] mx-4 text-center px-8 py-10 rounded-2xl shadow-2xl" style="background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.15)">
+            <h1 class="font-bold text-[50px] text-white font-family mb-2">Mo<em>men</em>tum</h1>
+            <p class="text-slate-300 font-Mono text-[16px] mb-8">Sign in to sync your tasks across all devices</p>
+            <button id="google-login-btn" class="flex items-center gap-3 mx-auto px-6 py-3 max-[340px]:text-[14px] bg-white rounded-xl text-gray-800 font-semibold text-[17px] cursor-pointer duration-400 shadow-lg">
+                <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="24" height="24" alt="Google">
+                <span>Sign in with Google</span>
+            </button>
+        </div>
+    </div>
+    
+    
     <div class="clock sm:max-w-[500px] max-w-[350px] h-[180px] mx-auto relative sm:mt-[20px] mt-[5px] sm:before:w-[80px] before:w-[70px] sm:before:h-[80px] before:h-[70px] before:bg-[#BFC6D7] before:rounded-[5px] before:absolute sm:before:left-[15px] before:left-[10px] sm:before:top-0 before:top-4 before:z-10 sm:after:w-[90px] sm:after:h-[90px] after:w-[85px] after:h-[85px] after:bg-[#184562] after:rounded-full after:absolute sm:after:right-[15px] after:right-[10px] sm:after:bottom-[-2px] after:bottom-2 after:z-10 ">
         <div class="sm:max-w-[400px] max-w-[280px] sm:max-h-[130px] max-h-[100px] m-auto absolute inset-0 ">
             <div class="w-full h-full pr-2 flex items-center justify-center pb-3 bg-[#C0CDE4]/45 rounded-xl backdrop-blur-[40px] shadow-[0_0_20px_rgba(0,0,0,0.5)] border-white/18 relative z-20">
@@ -55,12 +67,24 @@
         </form>
         
         <div class="max-w-[600px] sm:mx-auto mx-3 mt-5 flex sm:flex-nowrap flex-wrap items-center sm:gap-3 gap-2 sm:justify-between font-family">
-            <button onclick="handleAllListBox()" class="all-list sm:w-[33%] w-[calc(50%-4px)] sm:p-1.5 p-1 rounded-xl text-center text-[18px] border-2 shadow-[0_1px_10px_rgba(0,0,0,0.5)] border-slate-400 bg-white cursor-pointer sm:hover:scale-110 hover:scale-105 duration-400">All List: <span class="text-[26px] leading-[22px]">0</span></button>
-            <button onclick="handleProgressListBox()"  class="progress-list sm:w-[33%] w-[calc(50%-4px)] sm:p-1.5 p-1 rounded-xl text-center text-[18px] border-2 shadow-[0_1px_10px_rgba(0,0,0,0.5)] border-slate-400 bg-white cursor-pointer sm:hover:scale-110 hover:scale-105 duration-400">On Progress: <span class="text-[26px] leading-[22px]">0</span></button>
-            <button onclick="handleDoneListBox()"  class="done-list sm:w-[33%] w-full sm:p-1.5 p-1 rounded-xl text-center text-[18px] border-2 shadow-[0_1px_10px_rgba(0,0,0,0.5)] border-slate-400 bg-white cursor-pointer sm:hover:scale-110 hover:scale-105 duration-400">Todo Done: <span class="text-[26px] leading-[22px]">0</span></button>
+            <button class="all-list sm:w-[33%] w-[calc(50%-4px)] sm:p-1.5 p-1 rounded-xl text-center text-[18px] border-2 shadow-[0_1px_10px_rgba(0,0,0,0.5)] border-slate-400 bg-white cursor-pointer sm:hover:scale-110 hover:scale-105 duration-400">All List: <span class="text-[26px] leading-[22px]">0</span></button>
+            <button class="progress-list sm:w-[33%] w-[calc(50%-4px)] sm:p-1.5 p-1 rounded-xl text-center text-[18px] border-2 shadow-[0_1px_10px_rgba(0,0,0,0.5)] border-slate-400 bg-white cursor-pointer sm:hover:scale-110 hover:scale-105 duration-400">On Progress: <span class="text-[26px] leading-[22px]">0</span></button>
+            <button class="done-list sm:w-[33%] w-full sm:p-1.5 p-1 rounded-xl text-center text-[18px] border-2 shadow-[0_1px_10px_rgba(0,0,0,0.5)] border-slate-400 bg-white cursor-pointer sm:hover:scale-110 hover:scale-105 duration-400">Todo Done: <span class="text-[26px] leading-[22px]">0</span></button>
         </div>
-        
-        <ul class="todo-list max-h-[345px] overflow-y-auto max-w-[600px] sm:mx-auto mx-2 mt-5 py-3 rounded-xl backdrop-blur-lg space-y-3"></ul>
+
+        <div class="max-w-[600px] sm:mx-auto mx-3 mt-5 flex sm:flex-nowrap flex-wrap items-center sm:gap-3 gap-2 sm:justify-between font-family">
+            <div class="w-[48%] flex justify-end">
+                <button id="logout-btn" class="group w-full cursor-pointer flex items-center justify-center gap-3 px-3 py-1 rounded-xl border-2 border-slate-400  text-[20px] font-medium bg-white hover:bg-red-500/10 backdrop-blur-2xl hover:border-red-400/50 text-white/90 hover:text-red-400 shadow-lg shadow-black/40 transition-all duration-400 ">
+                    
+                    <img src="./images/sign-out-icon.svg" alt="sign-out-icon" width="28" height="28">
+                    
+                    <span class="text-[#112240] group-hover:text-white">Sign out</span>
+                </button>
+            </div>
+           
+        </div>
+
+        <ul class="todo-list max-h-[345px] overflow-y-auto max-w-[600px] sm:mx-auto mx-2 mt-2 py-3 rounded-xl backdrop-blur-lg space-y-3"></ul>
     </div>
     
     
@@ -74,8 +98,7 @@
     
     
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.2/Sortable.min.js"></script>
-    <script src="./js/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@hiseb/confetti@2.1.0/dist/confetti.min.js"></script>
-    
+    <script type="module" src="./js/main.js"></script>
 </body>
 </html>

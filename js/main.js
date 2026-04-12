@@ -1,4 +1,12 @@
+import { auth, db, provider, signInWithPopup, signOut, onAuthStateChanged, collection, doc, setDoc, deleteDoc, onSnapshot } from "./firebase.js"
+
 // Selecting elements
+const loginScreen = document.getElementById("login-screen")
+const googleLoginBtn = document.getElementById("google-login-btn")
+
+let currentUserId = null
+
+
 const elTodoForm = document.querySelector(".todo-form")
 const elTodoInput = document.querySelector(".todo-input")
 const elTodoDue = document.querySelector(".todo-due")
@@ -12,16 +20,21 @@ const progressBar = document.querySelector(".progress")
 const stateNumber = document.querySelector(".numbers")
 
 const elModalWrapper = document.querySelector(".modal-wrapper")
-const elModalInner = document.querySelector(".modal-inner")
 const elModalContent = document.querySelector(".modal-content")
-const elUpdateForm = document.querySelector(".update-form")
-const elUpdateDue = document.querySelector(".update-due")
 
 const todayDate = document.querySelector(".today-date")
 
+
 let currentFilter = 'all'
 
-let todo = JSON.parse(localStorage.getItem("setTodo")) || []
+let todo = []
+
+elAllList.addEventListener("click", handleAllListBox)
+elProgressList.addEventListener("click", handleProgressListBox)
+elDoneList.addEventListener("click", handleDoneListBox)
+
+
+
 
 
 
@@ -73,7 +86,7 @@ function applyCurrentFilter(){
 
 
 // add todo start 
-elTodoForm.addEventListener("submit", (e) => {
+elTodoForm.addEventListener("submit", async(e) => {
     e.preventDefault()
     
     if(elTodoInput.value.trim() == ""){
@@ -100,9 +113,7 @@ elTodoForm.addEventListener("submit", (e) => {
         isCompleted: false,
     }
     
-    todo.push(data)
-    applyCurrentFilter()
-    localStorage.setItem("setTodo", JSON.stringify(todo))
+    await saveTodo(data)
     
     elTodoDue.type = 'text'
     elTodoDue.placeholder = 'Due date (optional)'
@@ -267,26 +278,27 @@ function handleUpdateBtn(id){
                     
             <div class="mt-9 flex items-center justify-between">
                 <button type="submit" class="w-[65%] text-white py-2 bg-mist-700 rounded-lg shadow-[0_3px_8px_rgba(0,0,0,0.5)] cursor-pointer border-2 border-white/18">Save Changes</button>
-                <button onclick="handleCancelBtn()" type="button" class="w-[30%] text-mist-700 py-2 bg-white rounded-lg shadow-[0_3px_8px_rgba(0,0,0,0.5)] cursor-pointer border-2 border-mist-500">Cancel</button>
+                <button type="button" class=" cancel-btn w-[30%] text-mist-700 py-2 bg-white rounded-lg shadow-[0_3px_8px_rgba(0,0,0,0.5)] cursor-pointer border-2 border-mist-500">Cancel</button>
             </div>
         </form>
     `
+    elModalContent.querySelector(".cancel-btn").addEventListener("click", handleCancelBtn)
+
     if (!findedUpdatedItem.due) {
         setupDuePlaceholder(document.querySelector('.update-due'))
     }
     let elUpdateForm = document.querySelector(".update-form")
     
-    elUpdateForm.onsubmit = (e) => {
+    elUpdateForm.onsubmit = async(e) => {
         e.preventDefault()
         
         findedUpdatedItem.value = e.target.inputValue.value
-        findedUpdatedItem.due = e.target.inputDue.value
+        findedUpdatedItem.due = e.target.inputDue.value || null
+        
+        await saveTodo(findedUpdatedItem)
         
         elModalWrapper.classList.add("scale-0")
         document.body.classList.remove("overflow-y-hidden")
-        
-        applyCurrentFilter()
-        localStorage.setItem("setTodo", JSON.stringify(todo))
     }
 }
 
@@ -304,17 +316,15 @@ function handleCancelBtn(){
 
 
 // delete function start 
-function handleDeleteBtn(id){
-    const findedDeleteIndex = todo.findIndex(item => item.id === id)
-    todo.splice(findedDeleteIndex, 1)
-    applyCurrentFilter()
-    localStorage.setItem("setTodo", JSON.stringify(todo))
+async function handleDeleteBtn(id) {
+    const todoRef = doc(db, "users", currentUserId, "todos", String(id))
+    await deleteDoc(todoRef)
 }
 // delete function end 
 
 
 // complete start 
-function handleCompletedBtn(id){
+async function handleCompletedBtn(id){
     const findCompletedObj = todo.find(item => item.id === id)
     findCompletedObj.isCompleted = !findCompletedObj.isCompleted
     findCompletedObj.completedTime = findCompletedObj.isCompleted ? Date.now() : null
@@ -322,8 +332,7 @@ function handleCompletedBtn(id){
     const allDone = todo.length > 2 && todo.every(item => item.isCompleted)
     if (allDone) fireConfetti()
         
-    applyCurrentFilter()
-    localStorage.setItem("setTodo", JSON.stringify(todo))
+    await saveTodo(findCompletedObj)
 }
 
 function handleAllListBox(){
@@ -440,14 +449,13 @@ function setupDuePlaceholder(input) {
 // Reliable due date placeholder end
 
 
-
 // Drag to reorder start
 Sortable.create(elList, {
     animation: 200,
     handle: '.drag-handle',
     ghostClass: 'opacity-30',
     
-    onEnd: function (evt) {
+    onEnd: async function (evt) {
         if (currentFilter !== 'all') {
             applyCurrentFilter()
             alert("Reordering only works in All view.")
@@ -458,7 +466,8 @@ Sortable.create(elList, {
         const movedItem = todo.splice(evt.oldIndex, 1)[0]
         todo.splice(evt.newIndex, 0, movedItem)
         
-        localStorage.setItem("setTodo", JSON.stringify(todo))
+        todo.forEach((item, i) => { item.order = i })
+        for (const item of todo) { await saveTodo(item) }
         
         elList.querySelectorAll('li[data-id]').forEach((li, i) => {
             const numSpan = li.querySelector('.num-span')
@@ -467,3 +476,63 @@ Sortable.create(elList, {
     }
 })
 // Drag to reorder end
+
+
+
+// login IN start
+googleLoginBtn.addEventListener("click", async () => {
+    try {
+        provider.setCustomParameters({ prompt: 'select_account' })
+        await signInWithPopup(auth, provider)
+    } catch (err) {
+        console.error("Login error:", err)
+    }
+})
+
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        currentUserId = user.uid
+        loginScreen.style.display = "none"
+        document.body.style.overflow = ""
+        loadTodos()
+    } else {
+        currentUserId = null
+        loginScreen.style.display = "flex"
+        document.body.style.overflow = "hidden"
+        todo = []
+        renderTodo([])
+    }
+})
+// login IN end
+
+
+// login Out start
+const logoutBtn = document.getElementById("logout-btn")
+logoutBtn.addEventListener("click", async () => {
+    await signOut(auth)
+})
+// login Out end
+
+
+// loadTodos start
+function loadTodos() {
+    const todosRef = collection(db, "users", currentUserId, "todos")
+    onSnapshot(todosRef, (snapshot) => {
+        todo = snapshot.docs.map(doc => doc.data())
+        todo.sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
+        applyCurrentFilter()
+    })
+}
+// loadTodos startend
+
+
+// save todo start
+async function saveTodo(item) {
+    const todoRef = doc(db, "users", currentUserId, "todos", String(item.id))
+    await setDoc(todoRef, item)
+}
+// save todo end
+
+
+
+
