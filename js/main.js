@@ -37,8 +37,18 @@ elProgressList.addEventListener("click", handleProgressListBox)
 elDoneList.addEventListener("click", handleDoneListBox)
 
 
-
-
+// Toast start
+function showToast(msg) {
+    const toast = document.getElementById("toast")
+    toast.textContent = msg
+    toast.classList.remove("opacity-0")
+    toast.classList.add("opacity-100")
+    setTimeout(() => {
+        toast.classList.remove("opacity-100")
+        toast.classList.add("opacity-0")
+    }, 3000)
+}
+// Toast end
 
 
 // Convert to timestamp
@@ -482,6 +492,8 @@ Sortable.create(elList, {
 
 
 
+// --------------------------------- Sign In and Out --------------------
+
 // login IN start
 googleLoginBtn.addEventListener("click", async () => {
     try {
@@ -518,11 +530,20 @@ logoutBtn.addEventListener("click", async () => {
 
 
 // Telegram connect start
+let telegramOpened = false
 telegramBtn.addEventListener("click", async () => {
-    const current = await loadChatId()
-    window.open("https://t.me/momentum_todo_bot?start=connect", "_blank")
     
-    const msg = current ? "Yangi chat_id ni kiriting:" : "Botdan kelgan chat_id ni kiriting:";
+    if (!telegramOpened) {
+        window.open("https://t.me/momentum_todo_bot?start=hi", "_blank")
+        telegramOpened = true
+        telegramBtnText.textContent = "Enter Chat ID"
+        return
+    }
+    
+    const current = await loadChatId()
+    const msg = current 
+    ? `Enter new chat_id (current: ${current}):`
+    : `1. Open @momentum_todo_bot and press /start\n2. Enter the chat_id you received:`
     
     const chatId = prompt(msg)
     if (!chatId) return
@@ -533,10 +554,10 @@ telegramBtn.addEventListener("click", async () => {
 finishDayBtn.addEventListener("click", async () => {
     const chatId = await loadChatId()
     if (!chatId) {
-        alert("Avval Telegram ni ulang!")
+        showToast("⚠️ Please connect Telegram first!")
         return
     }
-  
+    
     const now = new Date()
     const dateStr = now.toLocaleString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
     
@@ -554,7 +575,13 @@ finishDayBtn.addEventListener("click", async () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ chatId, message })
     })
-    alert("Telegramga yuborildi! 🎉")
+    
+    for (const item of todo) {
+        const todoRef = doc(db, "users", currentUserId, "todos", String(item.id))
+        await deleteDoc(todoRef)
+    }
+    
+    showToast("✅ Sent to Telegram!")
 })
 // Telegram connect end
 
@@ -567,7 +594,7 @@ function loadTodos() {
         todo.sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
         applyCurrentFilter()
     })
-
+    
     loadChatId().then(chatId => {
         if (chatId) {
             telegramBtnText.textContent = "Telegram ✅"
@@ -583,8 +610,6 @@ async function saveTodo(item) {
     await setDoc(todoRef, item)
 }
 // save todo end
-
-
 
 
 // Save chatId start
