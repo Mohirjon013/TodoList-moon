@@ -557,6 +557,11 @@ finishDayBtn.addEventListener("click", async () => {
         showToast("⚠️ Please connect Telegram first!")
         return
     }
+
+    if(todo.length === 0){
+        showToast("🚫 No tasks to report!")
+        return
+    }
     
     const now = new Date()
     const dateStr = now.toLocaleString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
