@@ -519,7 +519,12 @@ logoutBtn.addEventListener("click", async () => {
 
 // Telegram connect start
 telegramBtn.addEventListener("click", async () => {
-    const chatId = prompt("Telegram botga /start yozing va chat_id ni kiriting:")
+    const current = await loadChatId()
+    const msg = current 
+        ? "Yangi chat_id kiriting (hozirgi o'chadi):"
+        : "Telegram botga (@momentum_todo_bot) /start yozing va chat_id ni kiriting:"
+    
+    const chatId = prompt(msg)
     if (!chatId) return
     await saveChatId(chatId.trim())
     telegramBtnText.textContent = "Telegram ✅"
@@ -544,7 +549,7 @@ finishDayBtn.addEventListener("click", async () => {
     const completed = todo.filter(item => item.isCompleted).length
     message += `\n📊 <b>Completed: ${completed} / ${todo.length}</b>`
     
-    await fetch("/api/send-message", {
+    await fetch("https://todo-list-moon.vercel.app/api/send-message", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ chatId, message })
@@ -561,6 +566,12 @@ function loadTodos() {
         todo = snapshot.docs.map(doc => doc.data())
         todo.sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
         applyCurrentFilter()
+    })
+
+    loadChatId().then(chatId => {
+        if (chatId) {
+            telegramBtnText.textContent = "Telegram ✅"
+        }
     })
 }
 // loadTodos startend
