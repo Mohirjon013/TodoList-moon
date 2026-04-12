@@ -520,9 +520,9 @@ logoutBtn.addEventListener("click", async () => {
 // Telegram connect start
 telegramBtn.addEventListener("click", async () => {
     const current = await loadChatId()
-    const msg = current 
-        ? "Yangi chat_id kiriting (hozirgi o'chadi):"
-        : "Telegram botga (@momentum_todo_bot) /start yozing va chat_id ni kiriting:"
+    window.open("https://t.me/momentum_todo_bot?start=connect", "_blank")
+    
+    const msg = current ? "Yangi chat_id ni kiriting:" : "Botdan kelgan chat_id ni kiriting:";
     
     const chatId = prompt(msg)
     if (!chatId) return
