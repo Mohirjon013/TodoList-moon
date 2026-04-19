@@ -1,4 +1,4 @@
-import { auth, db, provider, signInWithPopup, signOut, onAuthStateChanged, collection, doc, setDoc, deleteDoc, onSnapshot, getDoc } from "./firebase.js"
+import { auth, db, provider, signInWithPopup, signInWithRedirect, getRedirectResult, signOut, onAuthStateChanged, collection, doc, setDoc, deleteDoc, onSnapshot, getDoc } from "./firebase.js"
 
 // Selecting elements
 const loginScreen = document.getElementById("login-screen")
@@ -498,11 +498,19 @@ Sortable.create(elList, {
 googleLoginBtn.addEventListener("click", async () => {
     try {
         provider.setCustomParameters({ prompt: 'select_account' })
-        await signInWithPopup(auth, provider)
-    } catch (err) {
+        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
+        if(isMobile){
+            await signInWithRedirect(auth, provider)
+        }
+        else{
+            await signInWithPopup(auth, provider)
+        }
+    } 
+    catch (err) {
         console.error("Login error:", err)
     }
 })
+getRedirectResult(auth).catch(err => console.error(err))
 
 onAuthStateChanged(auth, (user) => {
     if (user) {

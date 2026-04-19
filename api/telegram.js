@@ -15,7 +15,7 @@ export default async function handler(req, res) {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
                 chat_id: chatId,
-                text: `✅ Ulandi! Sening chat_id ng: <code>${chatId}</code>\n\nMomentum ilovasiga bu raqamni kiriting.`,
+                text: `✅ Connected! Your chat_id: <code>${chatId}</code>\n\nEnter this number in the Momentum web app.`,
                 parse_mode: "HTML"
             })
         })
