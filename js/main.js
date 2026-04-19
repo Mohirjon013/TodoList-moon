@@ -507,6 +507,13 @@ googleLoginBtn.addEventListener("click", async () => {
     }
 })
 
+getRedirectResult(auth).then((result) => {
+    if (result?.user) {
+        loginScreen.style.display = "none"
+        document.body.style.overflow = ""
+    }
+}).catch(err => console.error(err))
+
 onAuthStateChanged(auth, (user) => {
     if (user) {
         currentUserId = user.uid
