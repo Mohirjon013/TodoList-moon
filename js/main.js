@@ -498,15 +498,11 @@ Sortable.create(elList, {
 googleLoginBtn.addEventListener("click", async () => {
     try {
         provider.setCustomParameters({ prompt: 'select_account' })
-        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
-        if(isMobile){
+        await signInWithPopup(auth, provider)
+    } catch (err) {
+        if (err.code === 'auth/popup-blocked' || err.code === 'auth/popup-closed-by-user') {
             await signInWithRedirect(auth, provider)
         }
-        else{
-            await signInWithPopup(auth, provider)
-        }
-    } 
-    catch (err) {
         console.error("Login error:", err)
     }
 })
