@@ -114,11 +114,14 @@ elTodoForm.addEventListener("submit", async(e) => {
     let dateday = date.getDate()
     let dateHour = date.getHours()
     let dateMin = date.getMinutes()
+
+    const maxOrder = todo.length > 0 ? Math.max(...todo.map(t => t.order ?? 0)) : -1
     
     const data = {
         id: Date.now(),
         value: elTodoInput.value.trim(),
         due: elTodoDue.value || null,
+        order: maxOrder + 1,
         createdTime:{
             dateYear,dateMonth,dateday,dateHour, dateMin
         },
@@ -616,7 +619,7 @@ function loadTodos() {
         }
     })
 }
-// loadTodos startend
+// loadTodos end
 
 
 // save todo start
